@@ -23,5 +23,7 @@ namespace CoronaVirusApp.Core
         public string Diagnosis { get; set; }
         public string Treatment { get; set; }
         public Symptom Symptom { get; set; }
+
+
     }
 }
