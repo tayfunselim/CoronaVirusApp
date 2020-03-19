@@ -18,11 +18,5 @@ namespace CoronaVirusApp.Core
         public string Email { get; set; }
         public string Gender { get; set; }
         public string PicturePath { get; set; }
-
-        public int PatientId { get; set; }
-        public Patient Patient { get; set; }
-
-        public int DoctorId { get; set; }
-        public Doctor Doctor { get; set; }
     }
 }

@@ -15,8 +15,6 @@ namespace CoronaVirusApp.Core
         public string DinamikanaProtekuvanje { get; set; }
         public string Lekuvanje { get; set; }
         
-        public Appointment Appointment { get; set; }
-        public int AppointmentId { get; set; }
 
         public int PatientId { get; set; }
         public Patient Patient { get; set; }

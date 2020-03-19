@@ -7,13 +7,7 @@ namespace CoronaVirusApp.Core
     public class Appointment
     {
         public int Id { get; set; }
-        public Patient Patient { get; set; }
-        public Doctor Doctor { get; set; }
-        public Appointment()
-        {
-            Patient = new Patient();
-            Doctor = new Doctor();
-        }        
+        public Clinic Clinic { get; set; }
         public string NameofAppointment { get; set; }
         public string Cause { get; set; }
         public int Feedback { get; set; }
@@ -24,6 +18,6 @@ namespace CoronaVirusApp.Core
         public string Treatment { get; set; }
         public Symptom Symptom { get; set; }
 
-
+        public bool IsApproved { get; set; }
     }
 }
