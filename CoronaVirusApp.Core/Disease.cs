@@ -10,12 +10,9 @@ namespace CoronaVirusApp.Core
         public string Name { get; set; }
         public DateTime SpreadingDate { get; set; }
         public double DeathRate { get; set; } // in percentage
-        public DiseaseType  DiseaseType { get; set; }
-        public string Descritpion { get; set; }
-        public string DinamikanaProtekuvanje { get; set; }
-        public string Lekuvanje { get; set; }
-        
-
+        public DiseaseType DiseaseType { get; set; }
+        public string Description { get; set; }        
+        public string Treatment { get; set; }        
         public int PatientId { get; set; }
         public Patient Patient { get; set; }
     }

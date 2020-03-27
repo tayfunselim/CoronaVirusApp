@@ -7,13 +7,11 @@ namespace CoronaVirusApp.Data.Interfaces
 {
     public interface IPatientData
     {
-        IEnumerable<Patient> GetPatients(string search = null);
+        IEnumerable<Patient> GetPatients(string searchName = null);
         Patient GetPatientById(int id);
         Patient Create(Patient patient);
         Patient Delete(int id);
         Patient Update(Patient patient);
-        int Commit();
-        int Count();
-
+        int Commit();        
     }
 }

@@ -7,13 +7,19 @@ namespace CoronaVirusApp.Core
     public class Clinic
     {
         public int Id { get; set; }
-        public List<Doctor> NumberofDoctors { get; set; }
-        public List<Patient> NumberofPatients { get; set; }
+        //public List<Doctor> NumberofDoctors { get; set; }
+        // public List<Patient> NumberofPatients { get; set; }
+        //public Clinic()
+        //{
+        //    //NumberofDoctors = new List<Doctor>();
+        //   // NumberofPatients = new List<Patient>();
+        //}
+        public List<Appointment> Appointments { get; set; }
         public Clinic()
         {
-            NumberofDoctors = new List<Doctor>();
-            NumberofPatients = new List<Patient>();
+            Appointments = new List<Appointment>();
         }
+
 
         public string Name { get; set; }
         public string City { get; set; }
@@ -24,7 +30,7 @@ namespace CoronaVirusApp.Core
         public int PatientId { get; set; }
         public Patient Patient { get; set; }
 
-        public int DoctorId { get; set; }
-        public Doctor Doctor { get; set; }
+        //public int DoctorId { get; set; }
+        //public Doctor Doctor { get; set; }
     }
 }
