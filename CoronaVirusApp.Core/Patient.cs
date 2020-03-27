@@ -13,7 +13,7 @@ namespace CoronaVirusApp.Core
         }
 
         public DateTime FirstSymptoms { get; set; }
-        //public List<string> Symptoms { get; set; }
+        
         public bool IsTested { get; set; }        
         public DateTime DateofCuring { get; set; }
         public bool IsForSelfIsolation { get; set; }
@@ -28,6 +28,6 @@ namespace CoronaVirusApp.Core
 
         //public int AppointmentId { get; set; }
         //public Appointment Appointment { get; set; }
-
+        //public List<string> Symptoms { get; set; }
     }
 }

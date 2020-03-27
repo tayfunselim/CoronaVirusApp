@@ -19,7 +19,6 @@ namespace CoronaVirusApp.Data
         public DbSet<Clinic> Clinics { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Disease> Diseases { get; set; }
-        public DbSet<Patient> Patients { get; set; }
-
+        public DbSet<Patient> Patients { get; set; }                
     }
 }

@@ -35,7 +35,7 @@ namespace CoronaVirusApp.Data.SqlData
             return tempAppointment;
         }
 
-        public Appointment GetAppointmentById(int id)
+        public Appointment GetAppointmentById(int? id)
         {
             return coronaVirusDbContext.Appointments.SingleOrDefault(a=>a.Id == id);
         }
