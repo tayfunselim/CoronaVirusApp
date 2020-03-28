@@ -6,9 +6,11 @@ using System.Text;
 
 namespace CoronaVirusApp.Core.Managment
 {
-    public class ApplicationUserRole : IdentityRole
+    public class ApplicationUserRole
     {
-        [Required]
+        public string Id { get; set; }
+        [Required(ErrorMessage ="Role Name Required")]
         public string RoleName { get; set; }
+        public List<string> Users { get; set; }
     }
 }

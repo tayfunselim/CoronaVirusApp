@@ -11,54 +11,71 @@ namespace CoronaVirusApp.Pages.Managment.Roles
 {
     public class EditModel : PageModel
     {
-        private readonly RoleManager<ApplicationUserRole> roleManager;
-        public EditModel(RoleManager<ApplicationUserRole> roleManager)
+        private readonly RoleManager<IdentityRole> roleManager;
+        public EditModel(RoleManager<IdentityRole> roleManager)
         {
             this.roleManager = roleManager;
         }
 
         public ApplicationUserRole ApplicationRole { get; set; }
 
-        public IActionResult OnGet(string id)
+        public IActionResult OnGet(int? id)
         {
-            if (id == null)
+            if (id.HasValue)
+            {
+                var temp = roleManager.FindByIdAsync(id.ToString());
+
+                if (temp == null)
+                {
+                    return RedirectToPage("NotFound");
+                }
+            }
+            else
             {
                 return RedirectToPage("./Index");
-            }
-
-            var temp = roleManager.FindByIdAsync(id);
-
-            if (temp == null)
-            {
-                return RedirectToPage("NotFound");
             }
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(string Id)
+        public async Task<IActionResult> OnPost(ApplicationUserRole user)
         {
-            ApplicationUserRole temp = await roleManager.FindByIdAsync(Id);
-
             if (ModelState.IsValid)
             {
-                if (temp.Id == null)
+                var zema = await roleManager.FindByIdAsync(user.Id);
+
+                if (user.Id == null)
                 {
-                    var drugo = await roleManager.CreateAsync(temp);
+                    IdentityRole identityRole = new IdentityRole()
+                    {
+                        Id = user.Id.ToString(),
+                        Name = user.RoleName,
+                    };
+
+                    IdentityResult drugo = await roleManager.CreateAsync(identityRole);
                     TempData["TempMessage"] = "New User is created!";
-                }
-                else
-                {
-                    var drugo = await roleManager.UpdateAsync(temp);
-                    TempData["TempMessage"] = "User Informartion Updated!";
 
                     if (drugo.Succeeded)
                     {
                         return RedirectToPage("./Index");
                     }
-                    else
+
+                    foreach (IdentityError error in drugo.Errors)
                     {
-                        ModelState.AddModelError("", "Something went wrong updating this user");
+                        ModelState.AddModelError("","Something went wrong creating this Role");
+                    }
+                }
+                else
+                {
+                    zema.Id = user.Id;
+                    zema.Name = user.RoleName;
+
+                    IdentityResult drugo = await roleManager.UpdateAsync(zema);
+                    TempData["TempMessage"] = "User Informartion Updated!";
+
+                    if (drugo.Succeeded)
+                    {
+                        return RedirectToPage("./Index");
                     }
                 }
             }

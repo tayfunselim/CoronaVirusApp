@@ -17,9 +17,9 @@ namespace CoronaVirusApp.Pages.Managment.Users
             this.userManager = userManager;
         }
         public ApplicationUser ApplicationUser { get; set; }
-        public IActionResult OnGet(string id)
+        public IActionResult OnGet(int id)
         {
-            var temp = userManager.FindByIdAsync(id);
+            var temp = userManager.FindByIdAsync(id.ToString());
             if(temp == null)
             {
                 return RedirectToPage("NotFound");
@@ -28,9 +28,9 @@ namespace CoronaVirusApp.Pages.Managment.Users
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(string id)
+        public async Task<IActionResult> OnPost(int id)
         {
-            ApplicationUser temp = await userManager.FindByIdAsync(id);
+            ApplicationUser temp = await userManager.FindByIdAsync(id.ToString());
 
             if(temp == null)
             {

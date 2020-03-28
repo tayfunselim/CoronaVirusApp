@@ -11,16 +11,16 @@ namespace CoronaVirusApp.Pages.Managment.Roles
 {
     public class DeleteModel : PageModel
     {
-        private readonly RoleManager<ApplicationUserRole> roleManager;
-        public DeleteModel(RoleManager<ApplicationUserRole> roleManager)
+        private readonly RoleManager<IdentityRole> roleManager;
+        public DeleteModel(RoleManager<IdentityRole> roleManager)
         {
             this.roleManager = roleManager;
         }
 
-        public ApplicationUserRole ApplicationRole { get; set; }
-        public IActionResult OnGet(string id)
+        public IdentityRole ApplicationRole { get; set; }
+        public IActionResult OnGet(int id)
         {
-            var temp = roleManager.FindByIdAsync(id);
+            var temp = roleManager.FindByIdAsync(id.ToString());
             if (temp == null)
             {
                 return RedirectToPage("NotFound");
@@ -29,16 +29,16 @@ namespace CoronaVirusApp.Pages.Managment.Roles
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(string id)
+        public async Task<IActionResult> OnPost(int id)
         {
-            ApplicationUserRole temp = await roleManager.FindByIdAsync(id);
+            IdentityRole temp = await roleManager.FindByIdAsync(id.ToString());
 
             if (temp == null)
             {
                 return RedirectToPage("NotFound");
             }
 
-            var delete = await roleManager.DeleteAsync(temp);
+            IdentityResult delete = await roleManager.DeleteAsync(temp);
 
             if (delete.Succeeded)
             {

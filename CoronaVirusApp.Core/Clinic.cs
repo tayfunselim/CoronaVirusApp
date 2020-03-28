@@ -30,7 +30,7 @@ namespace CoronaVirusApp.Core
         public int Capacity { get; set; }
 
 
-        public string PatientId { get; set; }
+        public int PatientId { get; set; }
         public Patient Patient { get; set; }
 
         //public int DoctorId { get; set; }

@@ -12,7 +12,7 @@ namespace CoronaVirusApp.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddIdentity<ApplicationUser, ApplicationUserRole>(options =>
+                services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
                     options.Password.RequiredLength = 8;
                     options.Password.RequireDigit = true;

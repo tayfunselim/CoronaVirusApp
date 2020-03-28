@@ -22,18 +22,20 @@ namespace CoronaVirusApp.Pages.Managment.Users
         [TempData]
         public string TempMessage { get; set; }
 
-        public IActionResult OnGet(string id)
+        public IActionResult OnGet(int? id)
         {
-            if(id == null)
+            if(id.HasValue)
+            {
+                var temp = userManager.FindByIdAsync(id.ToString());
+
+                if (temp == null)
+                {
+                    return RedirectToPage("NotFound");
+                }
+            }
+            else
             {
                 return RedirectToPage("./Index");
-            }
-
-            var temp = userManager.FindByIdAsync(id);
-
-            if(temp == null)
-            {
-                return RedirectToPage("NotFound");
             }
 
             return Page();
@@ -41,7 +43,7 @@ namespace CoronaVirusApp.Pages.Managment.Users
 
         public async Task<IActionResult> OnPost(Person person)
         {
-            ApplicationUser temp = await userManager.FindByIdAsync(person.Id);
+            ApplicationUser temp = await userManager.FindByIdAsync(person.Id.ToString());
 
             if(ModelState.IsValid)
             {
@@ -52,7 +54,7 @@ namespace CoronaVirusApp.Pages.Managment.Users
                 }
                 else
                 {
-                    temp.Id = person.Id;
+                    temp.Id = person.Id.ToString();
                     temp.FirstName = person.FirstName;
                     temp.LastName = person.LastName;
                     temp.City = person.City;

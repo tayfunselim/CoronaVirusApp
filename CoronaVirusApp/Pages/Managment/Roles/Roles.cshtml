@@ -1,6 +1,7 @@
 ﻿@page
 @model CoronaVirusApp.Pages.Managment.Roles.RolesModel
 @{
+    ViewData["Title"] = "Roles";
 }
 
 <h2>UserRoles:</h2>
@@ -13,10 +14,10 @@
             @foreach (var item in Model.UserRoles)
             {
                 <div class="card-header">
-                    @item.RoleName
+                    Role ID: @item.Id
                 </div>
                 <div class="card-body">
-                    @item.Name
+                    <h5 class="card-title">@item.Name</h5>
                 </div>
                 <div class="card-footer">
                     <a class="btn btn-outline-primary" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
@@ -33,5 +34,10 @@
     <h4>There are no Roles!</h4>
 </div>
     }
-
+<div class="row">
+    <div class="col">
+        <a class="btn btn-outline-secondary" asp-page="./Edit">Create New</a>
+        <a class="btn btn-outline-secondary" asp-page="~/Index">Back</a>
+    </div>
+</div>
 </div>

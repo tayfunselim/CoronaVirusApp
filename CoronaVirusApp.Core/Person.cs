@@ -7,7 +7,7 @@ namespace CoronaVirusApp.Core
 {
     public class Person
     {
-        public string Id { get; set; } // napraviv zamena vo string bidejki usermanager<identityuser> koristi id vo string
+        public int Id { get; set; } // napraviv zamena vo string bidejki usermanager<identityuser> koristi id vo string
 
         [Required]
         [DataType(DataType.Password, ErrorMessage = "Please, enter your Password again!")]

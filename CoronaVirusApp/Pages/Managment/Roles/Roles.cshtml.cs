@@ -7,12 +7,12 @@ namespace CoronaVirusApp.Pages.Managment.Roles
 {
     public class RolesModel : PageModel
     {
-        private readonly RoleManager<ApplicationUserRole> roleManager;
-        public RolesModel(RoleManager<ApplicationUserRole> roleManager)
+        private readonly RoleManager<IdentityRole> roleManager;
+        public RolesModel(RoleManager<IdentityRole> roleManager)
         {
             this.roleManager = roleManager;
         }
-        public IEnumerable<ApplicationUserRole> UserRoles { get; set; }
+        public IEnumerable<IdentityRole> UserRoles { get; set; }
         public void OnGet()
         {
             UserRoles = roleManager.Roles;
