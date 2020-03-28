@@ -1,4 +1,5 @@
 ﻿using CoronaVirusApp.Core;
+using CoronaVirusApp.Core.Managment;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace CoronaVirusApp.Data
 {
-    public class CoronaVirusDbContext : IdentityDbContext<IdentityUser>
+    public class CoronaVirusDbContext : IdentityDbContext<ApplicationUser>
     {
         public CoronaVirusDbContext(DbContextOptions<CoronaVirusDbContext> options) : base (options)
         {

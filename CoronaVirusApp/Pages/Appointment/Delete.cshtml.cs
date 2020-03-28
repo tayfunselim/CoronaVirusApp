@@ -23,18 +23,19 @@ namespace CoronaVirusApp.Pages.Appointment
             Appointment = appointmentData.GetAppointmentById(id);
             if (Appointment == null)
             {
-                return RedirectToPage("./NotFound");
+                return RedirectToPage("~/NotFound");
             }
             return Page();
         }
 
         public IActionResult OnPost(int id)
         {
-            var temp = appointmentData.Delete(id);
+            var temp = appointmentData.GetAppointmentById(id);
             if (temp == null)
             {
-                return RedirectToPage("./NotFound");
+                return RedirectToPage("~/NotFound");
             }
+            var temp2 = appointmentData.Delete(temp.Id);
 
             appointmentData.Commit();
             TempData["TempMessage"] = "The customer is deleted!";

@@ -28,7 +28,7 @@ namespace CoronaVirusApp.Data.SqlData
             return doctor;
         }
 
-        public Doctor Delete(int id)
+        public Doctor Delete(string id)
         {
             var tempDoctor = coronaVirusDbContext.Doctors.SingleOrDefault (d => d.Id == id);
             if (tempDoctor != null)
@@ -38,7 +38,7 @@ namespace CoronaVirusApp.Data.SqlData
             return tempDoctor;
         }
 
-        public Doctor GetDoctorById(int id)
+        public Doctor GetDoctorById(string id)
         {
             return coronaVirusDbContext.Doctors.SingleOrDefault(d => d.Id == id);
         }

@@ -1,0 +1,78 @@
+﻿@page
+@model CoronaVirusApp.Pages.Managment.Users.IndexModel
+@{
+    ViewBag.Title = "List of Users";
+}
+
+<h1>Users List:</h1>
+<hr />
+
+
+
+@if (Model.ApplicationUsers.Any())
+{
+    <div class="table-active">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        UserName:
+                    </th>
+                    <th>
+                        City:
+                    </th>
+                    <th>
+                        Gender:
+                    </th>
+                    <th>
+                        E-Mail:
+                    </th>
+                    <th>
+                        Age:
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ApplicationUsers)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Age)
+                        </td>
+                        <td>
+                            <a asp-page="./EditUser" asp-route-id="@item.Id">Edit</a>
+                            @*<a asp-page="./Details" asp-route-id="@item.Id">Details</a>*@
+                            <a asp-page="./DeleteUser" asp-route-id="@item.Id">Delete</a>
+                            <a asp-page="/Roles/Edit" asp-route-id="@item.Id">Add Role</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert text-center">
+        <h4>There are no users!</h4>
+    </div>
+}
+
+<div class="row">
+    <div class="col">
+        <a class="btn btn-outline-secondary" asp-page="/Areas/Identity/Pages/Account/Register">Create New</a>
+        <a class="btn btn-outline-secondary" asp-page="Index">Back</a>
+    </div>
+</div>

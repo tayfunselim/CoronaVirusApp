@@ -12,7 +12,7 @@ namespace CoronaVirusApp.Core
         //}
 
         public string JobTitle { get; set; }
-        public int PatientId { get; set; }
+        public string PatientId { get; set; }
         public Patient Patient { get; set; }
         //public List<Appointment> Appointments { get; set; }
         //public int ClinicId { get; set; }

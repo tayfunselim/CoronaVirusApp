@@ -1,0 +1,37 @@
+﻿@page
+@model CoronaVirusApp.Pages.Managment.Roles.RolesModel
+@{
+}
+
+<h2>UserRoles:</h2>
+
+<hr />
+<div class="container">
+    @if (Model.UserRoles.Any())
+    {
+        <div class="card">
+            @foreach (var item in Model.UserRoles)
+            {
+                <div class="card-header">
+                    @item.RoleName
+                </div>
+                <div class="card-body">
+                    @item.Name
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-outline-primary" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-outline-primary" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-outline-primary" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+
+<div class="alert text-center">
+    <h4>There are no Roles!</h4>
+</div>
+    }
+
+</div>

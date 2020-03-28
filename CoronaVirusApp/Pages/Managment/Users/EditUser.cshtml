@@ -1,0 +1,85 @@
+﻿@page
+@model CoronaVirusApp.Pages.Managment.Users.EditUserModel
+@{
+    ViewBag.Title = "Editting User Information";
+}
+
+
+@if (Model.applicationUser.Id == null)
+{
+    <h1>Create new User:</h1>
+}
+else
+{
+    <h1>Edit appointment: @Model.applicationUser.FirstName </h1>
+}
+<hr />
+
+@if (!string.IsNullOrEmpty(Model.TempMessage))
+{
+    <div class="alert alert-warning">@Model.TempMessage</div>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input type="hidden" asp-for="applicationUser.Id" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="applicationUser.UserName" class="control-label"></label>
+                <input asp-for="applicationUser.UserName" class="form-control" />
+                <span asp-validation-for="applicationUser.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.FirstName" class="control-label"></label>
+                <input asp-for="applicationUser.FirstName" class="form-control" />
+                <span asp-validation-for="applicationUser.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.LastName" class="control-label"></label>
+                <input asp-for="applicationUser.LastName" class="form-control" />
+                <span asp-validation-for="applicationUser.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.Age" class="control-label"></label>
+                <input asp-for="applicationUser.Age" class="form-control" />
+                <span asp-validation-for="applicationUser.Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.City" class="control-label"></label>
+                <input asp-for="applicationUser.City" class="form-control" />
+                <span asp-validation-for="applicationUser.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.Country" class="control-label"></label>
+                <input asp-for="applicationUser.Country" class="form-control" />
+                <span asp-validation-for="applicationUser.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.Gender" class="control-label"></label>
+                <select asp-for="applicationUser.Gender" class="form-control"></select>
+                <span asp-validation-for="applicationUser.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.Email" class="control-label"></label>
+                <input asp-for="applicationUser.Email" class="form-control" />
+                <span asp-validation-for="applicationUser.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.PhoneNumber" class="control-label"></label>
+                <input asp-for="applicationUser.PhoneNumber" class="form-control" />
+                <span asp-validation-for="applicationUser.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.PasswordHash" class="control-label"></label>
+                <input asp-for="applicationUser.PasswordHash" class="form-control" />
+                <span asp-validation-for="applicationUser.PasswordHash" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-page="./Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

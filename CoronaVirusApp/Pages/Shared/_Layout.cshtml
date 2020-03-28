@@ -22,7 +22,14 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Appointment/List">Appointment</a>
-                        </li>                        
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Management</a>
+                            <div class="dropdown-menu" aria-labelledby="navbardropdownMenuLink">
+                                <a asp-page="/Managment/Users/Index" class="dropdown-item">Users</a>
+                                <a asp-page="/Roles/Roles" class="dropdown-item">Roles</a>
+                            </div>
+                        </li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

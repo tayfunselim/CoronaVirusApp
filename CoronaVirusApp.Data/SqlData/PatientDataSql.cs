@@ -26,7 +26,7 @@ namespace CoronaVirusApp.Data.SqlData
             return patient;
         }
 
-        public Patient Delete(int id)
+        public Patient Delete(string id)
         {
             var tempPatient = coronaVirusDbContext.Patients.SingleOrDefault (p => p.Id == id);
             if (tempPatient != null)
@@ -36,7 +36,7 @@ namespace CoronaVirusApp.Data.SqlData
             return tempPatient;
         }
 
-        public Patient GetPatientById(int id)
+        public Patient GetPatientById(string id)
         {
             return coronaVirusDbContext.Patients.SingleOrDefault(p => p.Id == id);
         }
