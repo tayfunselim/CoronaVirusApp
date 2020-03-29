@@ -1,0 +1,53 @@
+﻿@page
+@model CoronaVirusApp.Pages.Disease.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@if (Model.Disease.Id == 0)
+{
+    <h1>Create new disease</h1>
+}
+else
+{
+    <h1>Edit disease: @Model.Disease.Name</h1>
+}
+
+
+<div class="container">
+    <form method="post">
+        <input type="hidden" asp-for="Disease.Id" />
+
+        <div class="form-row">
+            <label asp-for="Disease.Name"></label>
+            <input class="form-control" asp-for="Disease.Name" />
+            <span class="text-danger" asp-validation-for="Disease.Name"></span>
+        </div>
+        @* Disease Type fali ovde *@
+        <div class="form-row">
+            <label asp-for="Disease.SpreadingDate"></label>
+            <input class="form-control" asp-for="Disease.SpreadingDate" type="date" />
+            <span class="text-danger" asp-validation-for="Disease.SpreadingDate"></span>
+        </div>
+
+        <div class="form-row">
+            <label asp-for="Disease.DeathRate"></label>
+            <input class="form-control" asp-for="Disease.DeathRate" />
+            <span class="text-danger" asp-validation-for="Disease.DeathRate"></span>  
+        </div>
+
+        <div class="form-row">
+            <label asp-for="Disease.Description"></label>
+            <input class="form-control" asp-for="Disease.Description" />
+            <span class="text-danger" asp-validation-for="Disease.Description"></span>
+        </div>
+        <div class="form-row">
+            <label asp-for="Disease.Treatment"></label>  
+            <input class="form-control" asp-for="Disease.Treatment" />
+            <span class="text-danger" asp-validation-for="Disease.Treatment"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-page="./List" class="btn btn-primary">Back</a>
+    </form>
+</div>

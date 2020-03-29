@@ -1,14 +1,14 @@
-﻿@page "{id:int}"
-@model CoronaVirusApp.Pages.Appointment.DeleteModel
+﻿@page
+@model CoronaVirusApp.Pages.Disease.DeleteModel
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete @Model.Appointment.NameofAppointment</h1>
+<h1>Delete @Model.Disease.Name</h1>
 
 <div class="container">
     <div class="alert alert-dark">
-        Are you sure you want to delete @Model.Appointment.NameofAppointment?
+        Are you sure you want to confirm this information about @Model.Disease.Name?
     </div>
     <form method="post">
         <button type="submit" class="btn btn-danger">Yes!</button>
