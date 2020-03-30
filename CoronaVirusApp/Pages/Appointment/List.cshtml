@@ -38,26 +38,26 @@
             </thead>
             @foreach (var appointment in Model.Appointments)
             {
-                <tr>
-                    <td>@appointment.Clinic.Name</td>
-                    <td>@appointment.NameofAppointment</td>
-                    <td>@appointment.Cause</td>
-                    <td>@appointment.TestingDate</td>
-                    <td>@appointment.IsCoronaPositive</td>
-                    <td>@appointment.Diagnosis</td>
-                    <td>@appointment.Treatment</td>
-                    <td>
-                        <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@appointment.Id">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a class="btn btn-outline-secondary" asp-page="./Details" asp-route-id="@appointment.Id">
-                            <i class="fas fa-search-plus"></i>
-                        </a>
-                        <a class="btn btn-outline-secondary" asp-page="./Delete" asp-route-id="@appointment.Id">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
+        <tr>
+            <td>@appointment.Clinic?.Name</td>
+            <td>@appointment.NameofAppointment</td>
+            <td>@appointment.Cause</td>
+            <td>@appointment.TestingDate</td>
+            <td>@appointment.IsCoronaPositive</td>
+            <td>@appointment.Diagnosis</td>
+            <td>@appointment.Treatment</td>
+            <td>
+                <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@appointment.Id">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a class="btn btn-outline-secondary" asp-page="./Details" asp-route-id="@appointment.Id">
+                    <i class="fas fa-search-plus"></i>
+                </a>
+                <a class="btn btn-outline-secondary" asp-page="./Delete" asp-route-id="@appointment.Id">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
+        </tr>
             }
             <tfoot style="visibility:@(!Model.Appointments.Any() ? "visible" : "hidden")">
                 <tr>

@@ -35,20 +35,19 @@ namespace CoronaVirusApp.Pages.Appointment
             {
                 Appointment = new Core.Appointment();
             }
-            
-            var clinics = clinicData.GetClinics().ToList().Select(c => new { ID = c.Id, Display = $"{c.Name}" });
+
+            var clinics = clinicData.GetClinics().ToList().Select(c => new { Id = c.Id, Display = c.Name });
             Clinics = new SelectList(clinics, "Id", "Display");
-
-
             return Page();
         }
 
         public IActionResult OnPost()
         {
-            var clinic = clinicData.GetClinicById(Appointment.ClinicId);
-            Appointment.Clinic = clinic;
+            
             if (ModelState.IsValid)
             {
+                var clinic = clinicData.GetClinicById(Appointment.ClinicId);
+                Appointment.Clinic = clinic;
                 if (Appointment.Id == 0)
                 {
                     Appointment = appointmentData.Create(Appointment);

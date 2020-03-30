@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoronaVirusApp.Data.Migrations
 {
     [DbContext(typeof(CoronaVirusDbContext))]
-    [Migration("20200328162018_changes")]
-    partial class changes
+    [Migration("20200330084356_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,9 +32,10 @@ namespace CoronaVirusApp.Data.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Cause")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ClinicId")
+                    b.Property<int?>("ClinicId")
                         .HasColumnType("int");
 
                     b.Property<string>("Diagnosis")
@@ -44,7 +45,11 @@ namespace CoronaVirusApp.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("NameofAppointment")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PatientId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Symptom")
                         .HasColumnType("int");
@@ -59,6 +64,8 @@ namespace CoronaVirusApp.Data.Migrations
 
                     b.HasIndex("ClinicId");
 
+                    b.HasIndex("PatientId");
+
                     b.ToTable("Appointments");
                 });
 
@@ -72,26 +79,15 @@ namespace CoronaVirusApp.Data.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<int>("CapacityNow")
-                        .HasColumnType("int");
-
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
 
                     b.ToTable("Clinics");
                 });
@@ -115,9 +111,6 @@ namespace CoronaVirusApp.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("SpreadingDate")
                         .HasColumnType("datetime2");
 
@@ -125,8 +118,6 @@ namespace CoronaVirusApp.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
 
                     b.ToTable("Diseases");
                 });
@@ -354,6 +345,21 @@ namespace CoronaVirusApp.Data.Migrations
                     b.ToTable("Patients");
                 });
 
+            modelBuilder.Entity("CoronaVirusApp.Core.PatientDisease", b =>
+                {
+                    b.Property<int?>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DiseaseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PatientId", "DiseaseId");
+
+                    b.HasIndex("DiseaseId");
+
+                    b.ToTable("PatientDiseases");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -488,34 +494,33 @@ namespace CoronaVirusApp.Data.Migrations
             modelBuilder.Entity("CoronaVirusApp.Core.Appointment", b =>
                 {
                     b.HasOne("CoronaVirusApp.Core.Clinic", "Clinic")
-                        .WithMany("Appointments")
-                        .HasForeignKey("ClinicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CoronaVirusApp.Core.Clinic", b =>
-                {
-                    b.HasOne("CoronaVirusApp.Core.Patient", "Patient")
                         .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                        .HasForeignKey("ClinicId");
 
-            modelBuilder.Entity("CoronaVirusApp.Core.Disease", b =>
-                {
-                    b.HasOne("CoronaVirusApp.Core.Patient", "Patient")
-                        .WithMany("Diseases")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("CoronaVirusApp.Core.Patient", null)
+                        .WithMany("Appointments")
+                        .HasForeignKey("PatientId");
                 });
 
             modelBuilder.Entity("CoronaVirusApp.Core.Doctor", b =>
                 {
                     b.HasOne("CoronaVirusApp.Core.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("Doctors")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CoronaVirusApp.Core.PatientDisease", b =>
+                {
+                    b.HasOne("CoronaVirusApp.Core.Disease", "Disease")
+                        .WithMany("PatientDiseases")
+                        .HasForeignKey("DiseaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CoronaVirusApp.Core.Patient", "Patient")
+                        .WithMany("Diseases")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

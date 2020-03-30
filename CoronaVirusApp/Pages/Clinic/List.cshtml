@@ -1,0 +1,39 @@
+﻿@page
+@model CoronaVirusApp.Pages.Clinic.ListModel
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>Clinics</h1>
+<div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-primary table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Capacity (Beds)</th>
+                </tr>
+            </thead>
+            @foreach (var clinic in Model.Clinics)
+            {
+                <tr>
+                    <td>@clinic.Name</td>
+                    <td>@clinic.City</td>
+                    <td>@clinic.Capacity</td>
+                </tr>
+            }
+            <tfoot style="visibility:@(!Model.Clinics.Any() ? "visible" : "hidden")">
+                <tr>
+                    <td colspan="3">
+                        No appointments!
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<div class="form-group">
+    <a class="btn btn-primary" asp-page="./Edit">Add Clinic</a>
+</div>
+

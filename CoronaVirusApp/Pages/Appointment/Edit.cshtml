@@ -1,24 +1,24 @@
-﻿@page "{id:min(1)?}"
+﻿@page "{id:int?}"
 @model CoronaVirusApp.Pages.Appointment.EditModel
 @{
     ViewData["Title"] = "Edit";
 }
 
-
 @if (Model.Appointment.Id == 0)
 {
-    <h1>Create new appointment</h1>
+    <h1>Add new appointment</h1>
 }
 else
 {
-    <h1>Edit appointment: @Model.Appointment.NameofAppointment </h1>
+<h1>Edit appointment: @Model.Appointment.NameofAppointment </h1>
 }
+
+
 
 
 <div class="container">
     <form method="post">
         <input type="hidden" asp-for="Appointment.Id" />
-
         <div class="form-row">
             <label asp-for="Appointment.ClinicId"></label>
             <select class="form-control" asp-for="Appointment.ClinicId" asp-items="@Model.Clinics">

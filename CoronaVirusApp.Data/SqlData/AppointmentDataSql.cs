@@ -44,6 +44,7 @@ namespace CoronaVirusApp.Data.SqlData
         {
             var sNamePattern = !string.IsNullOrEmpty(searchName) ? $"{searchName}%" : searchName;
             return coronaVirusDbContext.Appointments
+                .Include(a=>a.Clinic)
                 .Where(a => string.IsNullOrEmpty(searchName) || EF.Functions.Like(a.NameofAppointment, sNamePattern))
                 .ToList();
         }

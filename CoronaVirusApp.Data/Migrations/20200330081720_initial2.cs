@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoronaVirusApp.Data.Migrations
 {
-    public partial class initial : Migration
+    public partial class initial2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,11 +39,53 @@ namespace CoronaVirusApp.Data.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Age = table.Column<int>(nullable: false),
+                    Adress = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    Country = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clinics",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: false),
+                    Country = table.Column<string>(nullable: true),
+                    CapacityNow = table.Column<int>(nullable: false),
+                    Capacity = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clinics", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Diseases",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    SpreadingDate = table.Column<DateTime>(nullable: false),
+                    DeathRate = table.Column<double>(nullable: false),
+                    DiseaseType = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Treatment = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Diseases", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,13 +94,15 @@ namespace CoronaVirusApp.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Password = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 20, nullable: false),
                     LastName = table.Column<string>(maxLength: 20, nullable: false),
                     Age = table.Column<int>(nullable: false),
                     Adress = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: false),
                     Country = table.Column<string>(nullable: true),
-                    Phone = table.Column<double>(nullable: true),
+                    Phone = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     Gender = table.Column<string>(nullable: true),
                     FirstSymptoms = table.Column<DateTime>(nullable: false),
@@ -120,8 +164,8 @@ namespace CoronaVirusApp.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -165,8 +209,8 @@ namespace CoronaVirusApp.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -181,52 +225,37 @@ namespace CoronaVirusApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clinics",
+                name: "Appointments",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false),
-                    City = table.Column<string>(nullable: false),
-                    Country = table.Column<string>(nullable: true),
-                    CapacityNow = table.Column<int>(nullable: false),
-                    Capacity = table.Column<int>(nullable: false),
-                    PatientId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clinics", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Clinics_Patients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "Patients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Diseases",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    SpreadingDate = table.Column<DateTime>(nullable: false),
-                    DeathRate = table.Column<double>(nullable: false),
-                    DiseaseType = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
+                    ClinicId = table.Column<int>(nullable: false),
+                    NameofAppointment = table.Column<string>(nullable: false),
+                    Cause = table.Column<string>(nullable: false),
+                    Bill = table.Column<double>(nullable: false),
+                    TestingDate = table.Column<DateTime>(nullable: false),
+                    IsCoronaPositive = table.Column<bool>(nullable: false),
+                    Diagnosis = table.Column<string>(nullable: true),
                     Treatment = table.Column<string>(nullable: true),
-                    PatientId = table.Column<int>(nullable: false)
+                    Symptom = table.Column<int>(nullable: false),
+                    PatientId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Diseases", x => x.Id);
+                    table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Diseases_Patients_PatientId",
+                        name: "FK_Appointments_Clinics_ClinicId",
+                        column: x => x.ClinicId,
+                        principalTable: "Clinics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -235,13 +264,15 @@ namespace CoronaVirusApp.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Password = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 20, nullable: false),
                     LastName = table.Column<string>(maxLength: 20, nullable: false),
                     Age = table.Column<int>(nullable: false),
                     Adress = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: false),
                     Country = table.Column<string>(nullable: true),
-                    Phone = table.Column<double>(nullable: true),
+                    Phone = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     Gender = table.Column<string>(nullable: true),
                     JobTitle = table.Column<string>(nullable: true),
@@ -259,30 +290,25 @@ namespace CoronaVirusApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Appointments",
+                name: "PatientDiseases",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ClinicId = table.Column<int>(nullable: false),
-                    NameofAppointment = table.Column<string>(nullable: true),
-                    Cause = table.Column<string>(nullable: true),
-                    Feedback = table.Column<int>(nullable: false),
-                    Bill = table.Column<double>(nullable: false),
-                    TestingDate = table.Column<DateTime>(nullable: false),
-                    IsCoronaPositive = table.Column<bool>(nullable: false),
-                    Diagnosis = table.Column<string>(nullable: true),
-                    Treatment = table.Column<string>(nullable: true),
-                    Symptom = table.Column<int>(nullable: false),
-                    IsApproved = table.Column<bool>(nullable: false)
+                    PatientId = table.Column<int>(nullable: false),
+                    DiseaseId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Appointments", x => x.Id);
+                    table.PrimaryKey("PK_PatientDiseases", x => new { x.PatientId, x.DiseaseId });
                     table.ForeignKey(
-                        name: "FK_Appointments_Clinics_ClinicId",
-                        column: x => x.ClinicId,
-                        principalTable: "Clinics",
+                        name: "FK_PatientDiseases_Diseases_DiseaseId",
+                        column: x => x.DiseaseId,
+                        principalTable: "Diseases",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PatientDiseases_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -291,6 +317,11 @@ namespace CoronaVirusApp.Data.Migrations
                 name: "IX_Appointments_ClinicId",
                 table: "Appointments",
                 column: "ClinicId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_PatientId",
+                table: "Appointments",
+                column: "PatientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -332,19 +363,14 @@ namespace CoronaVirusApp.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clinics_PatientId",
-                table: "Clinics",
-                column: "PatientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Diseases_PatientId",
-                table: "Diseases",
-                column: "PatientId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Doctors_PatientId",
                 table: "Doctors",
                 column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientDiseases_DiseaseId",
+                table: "PatientDiseases",
+                column: "DiseaseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -368,10 +394,10 @@ namespace CoronaVirusApp.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Diseases");
+                name: "Doctors");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
+                name: "PatientDiseases");
 
             migrationBuilder.DropTable(
                 name: "Clinics");
@@ -381,6 +407,9 @@ namespace CoronaVirusApp.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Diseases");
 
             migrationBuilder.DropTable(
                 name: "Patients");

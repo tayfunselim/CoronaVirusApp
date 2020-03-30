@@ -37,7 +37,7 @@ namespace CoronaVirusApp.Data.SqlData
             return tempClinic;
         }
 
-        public Clinic GetClinicById(int id)
+        public Clinic GetClinicById(int? id)
         {
             return coronaVirusDbContext.Clinics.SingleOrDefault(c => c.Id == id);
         }

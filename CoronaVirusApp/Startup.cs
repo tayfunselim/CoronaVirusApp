@@ -34,7 +34,8 @@ namespace CoronaVirusApp
             services.AddScoped<IClinicData, ClinicDataSql>();
             services.AddScoped<IDoctorData, DoctorDataSql>();
             services.AddScoped<IPatientData, PatientDataSql>();
-            services.AddScoped<IDiseaseData, DiseaseDataSql>();            
+            services.AddScoped<IDiseaseData, DiseaseDataSql>();
+            services.AddScoped<PatientDisease>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

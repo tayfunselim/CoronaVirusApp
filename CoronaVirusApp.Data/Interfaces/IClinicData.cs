@@ -13,7 +13,7 @@ namespace CoronaVirusApp.Data.Interfaces
         Clinic Create(Clinic clinic);
         Clinic Update(Clinic clinic);
         Clinic Delete(int id);
-        Clinic GetClinicById(int id);
+        Clinic GetClinicById(int? id);
         IEnumerable<Clinic> GetClinics ();
     }
 }

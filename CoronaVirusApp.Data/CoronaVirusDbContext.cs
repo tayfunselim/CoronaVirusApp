@@ -20,6 +20,13 @@ namespace CoronaVirusApp.Data
         public DbSet<Clinic> Clinics { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Disease> Diseases { get; set; }
-        public DbSet<Patient> Patients { get; set; }                
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<PatientDisease> PatientDiseases { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PatientDisease>().HasKey(e => new { e.PatientId, e.DiseaseId });
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
