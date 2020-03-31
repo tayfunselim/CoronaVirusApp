@@ -7,7 +7,7 @@ namespace CoronaVirusApp.Data.Interfaces
 {
     public interface IAppointmentData
     {
-        IEnumerable<Appointment> GetAppointments(string searchName = null);
+        IEnumerable<Appointment> GetAppointments();
         Appointment GetAppointmentById(int? id);
         Appointment Create(Appointment appointment);
         Appointment Delete(int id);

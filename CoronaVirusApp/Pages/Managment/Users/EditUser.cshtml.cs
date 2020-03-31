@@ -41,9 +41,9 @@ namespace CoronaVirusApp.Pages.Managment.Users
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(Person person)
+        public async Task<IActionResult> OnPost(ApplicationUser applicationUser)
         {
-            ApplicationUser temp = await userManager.FindByIdAsync(person.Id.ToString());
+            ApplicationUser temp = await userManager.FindByIdAsync(applicationUser.Id.ToString());
 
             if(ModelState.IsValid)
             {
@@ -54,16 +54,16 @@ namespace CoronaVirusApp.Pages.Managment.Users
                 }
                 else
                 {
-                    temp.Id = person.Id.ToString();
-                    temp.FirstName = person.FirstName;
-                    temp.LastName = person.LastName;
-                    temp.City = person.City;
-                    temp.Country = person.Country;
-                    temp.PhoneNumber = person.Phone;
-                    temp.Adress = person.Adress;
-                    temp.Age = person.Age;
-                    temp.Email = person.Email;
-                    temp.PasswordHash = person.Password;
+                    temp.Id = applicationUser.Id.ToString();
+                    temp.FirstName = applicationUser.FirstName;
+                    temp.LastName = applicationUser.LastName;
+                    temp.City = applicationUser.City;
+                    temp.Country = applicationUser.Country;
+                    temp.PhoneNumber = applicationUser.PhoneNumber;
+                    temp.Adress = applicationUser.Adress;
+                    temp.Age = applicationUser.Age;
+                    temp.Email = applicationUser.Email;
+                    temp.PasswordHash = applicationUser.PasswordHash;
 
                     var drugo = await userManager.UpdateAsync(temp);
                     TempData["TempMessage"] = "User Informartion Updated!";

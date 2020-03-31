@@ -21,8 +21,7 @@ else
             <label asp-for="Disease.Name"></label>
             <input class="form-control" asp-for="Disease.Name" />
             <span class="text-danger" asp-validation-for="Disease.Name"></span>
-        </div>
-        @* Disease Type fali ovde *@
+        </div>        
         <div class="form-row">
             <label asp-for="Disease.SpreadingDate"></label>
             <input class="form-control" asp-for="Disease.SpreadingDate" type="date" />
@@ -36,15 +35,12 @@ else
         </div>
 
         <div class="form-row">
-            <label asp-for="Disease.Description"></label>
-            <input class="form-control" asp-for="Disease.Description" />
-            <span class="text-danger" asp-validation-for="Disease.Description"></span>
-        </div>
-        <div class="form-row">
-            <label asp-for="Disease.Treatment"></label>  
-            <input class="form-control" asp-for="Disease.Treatment" />
-            <span class="text-danger" asp-validation-for="Disease.Treatment"></span>
-        </div>
+            <label asp-for="Disease.DiseaseType"></label>
+            <select class="form-control" asp-for="Disease.DiseaseType" asp-items="@Model.DiseaseType">
+                <option value="">select disease type</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Disease.DiseaseType"></span>
+        </div>       
 
         <button type="submit" class="btn btn-success">Save</button>
         <a asp-page="./List" class="btn btn-primary">Back</a>

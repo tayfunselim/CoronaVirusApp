@@ -29,9 +29,7 @@
                     <th>Name</th>
                     <th>Disease Type</th>
                     <th>Spreading Date</th>
-                    <th>DeathRate</th>
-                    <th>Description</th>
-                    <th>Treatment</th>
+                    <th>DeathRate</th>                                        
                     <th></th>
                 </tr>
             </thead>
@@ -41,9 +39,7 @@
                     <td>@disease.Name</td>
                     <td>@disease.DiseaseType</td>
                     <td>@disease.SpreadingDate</td>
-                    <td>@disease.DeathRate %</td>
-                    <td>@disease.Description</td>
-                    <td>@disease.Treatment</td>
+                    <td>@disease.DeathRate %</td>                    
                     <td>
                         <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@disease.Id">
                             <i class="fas fa-edit"></i>

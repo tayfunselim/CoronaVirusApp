@@ -12,15 +12,10 @@ namespace CoronaVirusApp.Core
         
         [Required, Display(Name = "Clinic")]
         public int? ClinicId { get; set; }
-        [Required]
-        public string NameofAppointment { get; set; }
-        [Required]
-        public string Cause { get; set; }        
-        public double Bill { get; set; }
-        public DateTime TestingDate { get; set; }
-        public bool IsCoronaPositive { get; set; }
-        public string Diagnosis { get; set; }
-        public string Treatment { get; set; }
+        
+        [Required]        
+        public DateTime Date { get; set; }        
+        
         public Symptom Symptom { get; set; }        
     }
 }

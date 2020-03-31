@@ -1,4 +1,5 @@
-﻿using CoronaVirusApp.Data.Interfaces;
+﻿using CoronaVirusApp.Core;
+using CoronaVirusApp.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,15 +12,18 @@ namespace CoronaVirusApp.Pages.Appointment
     {
         private readonly IAppointmentData appointmentData;
         private readonly IClinicData clinicData;
+        private readonly IHtmlHelper htmlHelper;
 
         [BindProperty]
         public Core.Appointment Appointment { get; set; }
         public IEnumerable<SelectListItem> Clinics { get; set; }
+        public IEnumerable<SelectListItem> Symptom { get; set; }
 
-        public EditModel(IAppointmentData appointmentData, IClinicData clinicData)
+        public EditModel(IAppointmentData appointmentData, IClinicData clinicData, IHtmlHelper htmlHelper)
         {
             this.appointmentData = appointmentData;
             this.clinicData = clinicData;
+            this.htmlHelper = htmlHelper;
         }
         public IActionResult OnGet(int? id)
         {
@@ -38,6 +42,7 @@ namespace CoronaVirusApp.Pages.Appointment
 
             var clinics = clinicData.GetClinics().ToList().Select(c => new { Id = c.Id, Display = c.Name });
             Clinics = new SelectList(clinics, "Id", "Display");
+            Symptom = htmlHelper.GetEnumSelectList<Symptom>();
             return Page();
         }
 
@@ -63,6 +68,7 @@ namespace CoronaVirusApp.Pages.Appointment
             }
             var clinics = clinicData.GetClinics().ToList().Select(c => new { ID = c.Id, Display = $"{c.Name}" });
             Clinics = new SelectList(clinics, "Id", "Display");
+            Symptom = htmlHelper.GetEnumSelectList<Symptom>();
             return Page();
         }
     }

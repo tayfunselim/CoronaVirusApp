@@ -27,7 +27,7 @@ namespace CoronaVirusApp.Pages.Appointment
 
         public void OnGet()
         {
-            Appointments = appointmentData.GetAppointments(SearchName);
+            Appointments = appointmentData.GetAppointments();
         }
     }
 }

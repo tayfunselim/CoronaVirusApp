@@ -40,12 +40,10 @@ namespace CoronaVirusApp.Data.SqlData
             return coronaVirusDbContext.Appointments.SingleOrDefault(a=>a.Id == id);
         }
 
-        public IEnumerable<Appointment> GetAppointments(string searchName = null)
-        {
-            var sNamePattern = !string.IsNullOrEmpty(searchName) ? $"{searchName}%" : searchName;
+        public IEnumerable<Appointment> GetAppointments()
+        {            
             return coronaVirusDbContext.Appointments
-                .Include(a=>a.Clinic)
-                .Where(a => string.IsNullOrEmpty(searchName) || EF.Functions.Like(a.NameofAppointment, sNamePattern))
+                .Include(a=>a.Clinic)         
                 .ToList();
         }
 

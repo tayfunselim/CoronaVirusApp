@@ -5,19 +5,7 @@
 }
 
 <h1>Appointments</h1>
-<div>
-    <form method="get">
-        <div class="form-group">
-            <div class="input-group">
-                <input type="search" class="form-control" placeholder="search" asp-for="SearchName">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </form>
+<div>    
     @if (!string.IsNullOrEmpty(Model.TempMessage))
     {
         <div class="alert alert-warning">@Model.TempMessage</div>
@@ -27,12 +15,8 @@
             <thead class="thead-light">
                 <tr>
                     <th>Clinic</th>
-                    <th>Name</th>
-                    <th>Cause</th>
-                    <th>Testing Date</th>
-                    <th>Test Result</th>
-                    <th>Diagnosis</th>
-                    <th>Treatment</th>
+                    <th>Date</th>
+                    <th>Symptom</th>                    
                     <th></th>
                 </tr>
             </thead>
@@ -40,12 +24,8 @@
             {
         <tr>
             <td>@appointment.Clinic?.Name</td>
-            <td>@appointment.NameofAppointment</td>
-            <td>@appointment.Cause</td>
-            <td>@appointment.TestingDate</td>
-            <td>@appointment.IsCoronaPositive</td>
-            <td>@appointment.Diagnosis</td>
-            <td>@appointment.Treatment</td>
+            <td>@appointment.Date</td>
+            <td>@appointment.Symptom</td>            
             <td>
                 <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@appointment.Id">
                     <i class="fas fa-edit"></i>

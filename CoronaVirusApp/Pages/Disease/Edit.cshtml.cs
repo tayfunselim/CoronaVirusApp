@@ -13,14 +13,17 @@ namespace CoronaVirusApp.Pages.Disease
     public class EditModel : PageModel
     {
         private readonly IDiseaseData diseaseData;
-        //private readonly DiseaseType diseaseTypes;
+        private readonly IHtmlHelper htmlHelper;
+
         [BindProperty]
         public Core.Disease Disease{ get; set; }
-        //public IEnumerable<SelectListItem> DiseaseType { get; set; }
+        
+        public IEnumerable<SelectListItem> DiseaseType { get; set; }
 
-        public EditModel(IDiseaseData diseaseData /*,DiseaseType diseaseTypes*/)
+        public EditModel(IDiseaseData diseaseData, IHtmlHelper htmlHelper)
         {
             this.diseaseData = diseaseData;
+            this.htmlHelper = htmlHelper;
             //this.diseaseTypes = diseaseTypes;
         }
         public IActionResult OnGet(int? id)
@@ -38,8 +41,8 @@ namespace CoronaVirusApp.Pages.Disease
                 Disease = new Core.Disease();
             }
 
-            //DiseaseType = new SelectList(diseaseTypes, "Id", "Display");
 
+            DiseaseType = htmlHelper.GetEnumSelectList<DiseaseType>();
             return Page();
         }
 
@@ -60,6 +63,7 @@ namespace CoronaVirusApp.Pages.Disease
                 diseaseData.Commit();
                 return RedirectToPage("./List");
             }
+            DiseaseType = htmlHelper.GetEnumSelectList<DiseaseType>();
             return Page();
         }
     }
