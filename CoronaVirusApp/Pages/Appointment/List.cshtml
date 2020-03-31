@@ -16,6 +16,7 @@
                 <tr>
                     <th>Clinic</th>
                     <th>Date</th>
+                    <th>Doctor</th>
                     <th>Symptom</th>                    
                     <th></th>
                 </tr>
@@ -25,14 +26,12 @@
         <tr>
             <td>@appointment.Clinic?.Name</td>
             <td>@appointment.Date</td>
+            <td>@appointment.Doctor?.FirstName @appointment.Doctor?.LastName</td>
             <td>@appointment.Symptom</td>            
             <td>
                 <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@appointment.Id">
                     <i class="fas fa-edit"></i>
-                </a>
-                <a class="btn btn-outline-secondary" asp-page="./Details" asp-route-id="@appointment.Id">
-                    <i class="fas fa-search-plus"></i>
-                </a>
+                </a>                
                 <a class="btn btn-outline-secondary" asp-page="./Delete" asp-route-id="@appointment.Id">
                     <i class="fas fa-trash"></i>
                 </a>

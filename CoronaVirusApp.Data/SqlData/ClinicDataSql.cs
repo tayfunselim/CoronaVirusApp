@@ -1,10 +1,8 @@
 ﻿using CoronaVirusApp.Core;
 using CoronaVirusApp.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CoronaVirusApp.Data.SqlData
 {
@@ -45,17 +43,7 @@ namespace CoronaVirusApp.Data.SqlData
         public IEnumerable<Clinic> GetClinics()
         {
             return coronaVirusDbContext.Clinics.ToList();
-        }
-
-        public IEnumerable<Doctor> GetDoctors(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Patient> GetPatients(int id)
-        {
-            throw new NotImplementedException();
-        }
+        }        
 
         public Clinic Update(Clinic clinic)
         {

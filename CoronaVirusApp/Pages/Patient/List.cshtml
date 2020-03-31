@@ -1,0 +1,61 @@
+﻿@page
+@model CoronaVirusApp.Pages.Patient.ListModel
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>Patients</h1>
+<div>
+    @if (!string.IsNullOrEmpty(Model.TempMessage))
+    {
+        <div class="alert alert-warning">@Model.TempMessage</div>
+    }
+    <div class="table-responsive">
+        <table class="table table-bordered table-primary table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>City</th>                    
+                    <th>Is Corona Positiva</th>
+                    <th>Recovered</th>
+                </tr>
+            </thead>
+            @foreach (var patient in Model.Patients)
+            {
+        <tr>
+            <td>@patient.FirstName</td>
+            <td>@patient.LastName</td>
+            <td>@patient.Age</td>
+            <td>@patient.City</td>            
+            <td>@patient.IsCoronaPositive</td>
+            <td>@patient.IsRecovered</td>            
+
+            <td>
+                <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@patient.Id">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a class="btn btn-outline-secondary" asp-page="./Details" asp-route-id="@patient.Id">
+                    <i class="fas fa-search-plus"></i>
+                </a>
+                <a class="btn btn-outline-secondary" asp-page="./Delete" asp-route-id="@patient.Id">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+            }
+            <tfoot style="visibility:@(!Model.Patients.Any() ? "visible" : "hidden")">
+                <tr>
+                    <td colspan="3">
+                        No appointments!
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<div class="form-group">
+    <a class="btn btn-primary" asp-page="./Edit">Add Patient</a>
+</div>
+

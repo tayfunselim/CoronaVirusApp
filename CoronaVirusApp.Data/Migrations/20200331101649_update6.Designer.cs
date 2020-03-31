@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoronaVirusApp.Data.Migrations
 {
     [DbContext(typeof(CoronaVirusDbContext))]
-    [Migration("20200330095126_update")]
-    partial class update
+    [Migration("20200331101649_update6")]
+    partial class update6
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,26 +28,16 @@ namespace CoronaVirusApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("Bill")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Cause")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("ClinicId")
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<string>("Diagnosis")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsCoronaPositive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("NameofAppointment")
+                    b.Property<int?>("DoctorId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("int");
 
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
@@ -55,15 +45,11 @@ namespace CoronaVirusApp.Data.Migrations
                     b.Property<int>("Symptom")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("TestingDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Treatment")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ClinicId");
+
+                    b.HasIndex("DoctorId");
 
                     b.HasIndex("PatientId");
 
@@ -103,19 +89,10 @@ namespace CoronaVirusApp.Data.Migrations
                     b.Property<double>("DeathRate")
                         .HasColumnType("float");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("DiseaseType")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("SpreadingDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Treatment")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -130,20 +107,10 @@ namespace CoronaVirusApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Adress")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -152,8 +119,8 @@ namespace CoronaVirusApp.Data.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<string>("JobTitle")
                         .HasColumnType("nvarchar(max)");
@@ -163,24 +130,7 @@ namespace CoronaVirusApp.Data.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
 
                     b.ToTable("Doctors");
                 });
@@ -278,23 +228,10 @@ namespace CoronaVirusApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Adress")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateofCuring")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -303,16 +240,19 @@ namespace CoronaVirusApp.Data.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
-                    b.Property<DateTime>("FirstSymptoms")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsCoronaPositive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDead")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsForSelfIsolation")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsInsured")
+                    b.Property<bool>("IsRecovered")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsTested")
@@ -325,21 +265,6 @@ namespace CoronaVirusApp.Data.Migrations
 
                     b.Property<int>("MedicalHistory")
                         .HasColumnType("int");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Statement")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -500,18 +425,15 @@ namespace CoronaVirusApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CoronaVirusApp.Core.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CoronaVirusApp.Core.Patient", null)
                         .WithMany("Appointments")
                         .HasForeignKey("PatientId");
-                });
-
-            modelBuilder.Entity("CoronaVirusApp.Core.Doctor", b =>
-                {
-                    b.HasOne("CoronaVirusApp.Core.Patient", "Patient")
-                        .WithMany("Doctors")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("CoronaVirusApp.Core.PatientDisease", b =>

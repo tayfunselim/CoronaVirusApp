@@ -1,0 +1,22 @@
+﻿@page "{id:int}"
+@model CoronaVirusApp.Pages.Patient.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details for: @Model.Patient.FirstName @Model.Patient.LastName</h1>
+<div>
+    Id: @Model.Patient.Id
+</div>
+<div>
+    Patient Name: @Model.Patient.FirstName @Model.Patient.LastName
+</div>
+<div>
+    City: @Model.Patient.City
+</div>
+<div>
+    Age : @Model.Patient.Age
+</div>
+
+<a asp-page="./List" class="btn btn-primary">Back</a>
+

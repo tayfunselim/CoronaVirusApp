@@ -23,8 +23,7 @@ namespace CoronaVirusApp.Pages.Disease
         public EditModel(IDiseaseData diseaseData, IHtmlHelper htmlHelper)
         {
             this.diseaseData = diseaseData;
-            this.htmlHelper = htmlHelper;
-            //this.diseaseTypes = diseaseTypes;
+            this.htmlHelper = htmlHelper;            
         }
         public IActionResult OnGet(int? id)
         {

@@ -9,6 +9,7 @@ namespace CoronaVirusApp.Core
 
         [Required]
         public string Name { get; set; }
+
         [Required]
         public string City { get; set; }        
         

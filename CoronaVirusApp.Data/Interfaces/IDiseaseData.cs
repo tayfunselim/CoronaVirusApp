@@ -12,6 +12,6 @@ namespace CoronaVirusApp.Data.Interfaces
         Disease Update(Disease disease);
         Disease Delete(int id);
         int Commit();
-        IEnumerable<Disease> GetDiseases(string Name);
+        IEnumerable<Disease> GetDiseases();
     }
 }

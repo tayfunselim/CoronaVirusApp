@@ -38,7 +38,7 @@ namespace CoronaVirusApp.Pages.Appointment
             var temp2 = appointmentData.Delete(temp.Id);
 
             appointmentData.Commit();
-            TempData["TempMessage"] = "The customer is deleted!";
+            TempData["TempMessage"] = "The appointment is deleted!";
             return RedirectToPage("./List");
         }
     }

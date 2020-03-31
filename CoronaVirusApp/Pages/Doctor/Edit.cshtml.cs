@@ -1,24 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CoronaVirusApp.Core.Enum;
 using CoronaVirusApp.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace CoronaVirusApp.Pages.Doctor
 {
     public class EditModel : PageModel
     {
         private readonly IDoctorData doctorData;
+        private readonly IHtmlHelper htmlHelper;
 
         [BindProperty]
         public Core.Doctor Doctor { get; set; }
+        public IEnumerable<SelectListItem> Gender { get; set; }
 
-        public EditModel(IDoctorData doctorData)
+        public EditModel(IDoctorData doctorData, IHtmlHelper htmlHelper)
         {
             this.doctorData = doctorData;
+            this.htmlHelper = htmlHelper;
         }
         public IActionResult OnGet(int? id)
         {
@@ -34,7 +36,7 @@ namespace CoronaVirusApp.Pages.Doctor
             {
                 Doctor = new Core.Doctor();
             }
-
+            Gender = htmlHelper.GetEnumSelectList<Gender>();
             return Page();
         }
 
@@ -55,6 +57,7 @@ namespace CoronaVirusApp.Pages.Doctor
                 doctorData.Commit();
                 return RedirectToPage("./List");
             }
+            Gender = htmlHelper.GetEnumSelectList<Gender>();
             return Page();
         }
     }

@@ -1,10 +1,8 @@
 ﻿using CoronaVirusApp.Core;
 using CoronaVirusApp.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CoronaVirusApp.Data.SqlData
 {
@@ -39,7 +37,7 @@ namespace CoronaVirusApp.Data.SqlData
             return tempDoctor;
         }
 
-        public Doctor GetDoctorById(int id)
+        public Doctor GetDoctorById(int? id)
         {
             return coronaVirusDbContext.Doctors.SingleOrDefault(d => d.Id == id);
         }

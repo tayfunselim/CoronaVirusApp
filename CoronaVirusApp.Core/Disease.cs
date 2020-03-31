@@ -7,8 +7,7 @@ namespace CoronaVirusApp.Core
     public class Disease
     {
         public int Id { get; set; }        
-        public string Name { get; set; }
-        public DateTime SpreadingDate { get; set; }
+        public string Name { get; set; }        
         public double DeathRate { get; set; } // in percentage
         public DiseaseType DiseaseType { get; set; }                
         public List<PatientDisease> PatientDiseases { get; set; }

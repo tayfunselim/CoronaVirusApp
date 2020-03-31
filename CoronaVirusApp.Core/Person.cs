@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoronaVirusApp.Core.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -9,20 +10,17 @@ namespace CoronaVirusApp.Core
     {
         public int Id { get; set; }        
 
-        [Required, StringLength(20, MinimumLength = 3)]
+        [Required, StringLength(20, MinimumLength = 3), Display(Name = "First Name")]
         public string FirstName { get; set; }
-        [Required, StringLength(20, MinimumLength = 3)]
+        [Required, StringLength(20, MinimumLength = 3), Display(Name = "Last Name")]
         public string LastName { get; set; }
         [Required]
         public int Age { get; set; }        
         
         [Required]
-        public string City { get; set; }                
+        public string City { get; set; }                        
         
         [Required]
-        [Display(Name = "Enter your E-Mail Adress!")]
-        [DataType(DataType.EmailAddress,ErrorMessage = "Please enter valid Email Adderss!")]
-        public string Email { get; set; }
-        public string Gender { get; set; }        
+        public Gender Gender { get; set; }
     }
 }

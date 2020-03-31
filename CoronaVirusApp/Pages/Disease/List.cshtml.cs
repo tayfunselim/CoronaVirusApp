@@ -15,10 +15,7 @@ namespace CoronaVirusApp.Pages.Disease
         public ListModel(IDiseaseData diseaseData)
         {
             this.diseaseData = diseaseData;
-        }
-
-        [BindProperty(SupportsGet = true)]
-        public string Name { get; set; }
+        }        
 
         [TempData]
         public string TempMessage { get; set; }
@@ -27,7 +24,7 @@ namespace CoronaVirusApp.Pages.Disease
 
         public void OnGet()
         {
-            Diseases = diseaseData.GetDiseases(Name);
+            Diseases = diseaseData.GetDiseases();
         }
     }
 }

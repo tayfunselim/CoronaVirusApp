@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaVirusApp.Core", "Coro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaVirusApp.Data", "CoronaVirusApp.Data\CoronaVirusApp.Data.csproj", "{C9E9DFBE-9B3D-4F49-9776-C31721A774A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaVirusAppStatistics", "CoronaVirusAppStatistics\CoronaVirusAppStatistics.csproj", "{046561A7-6C9E-4649-91CE-454D7C25A0A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C9E9DFBE-9B3D-4F49-9776-C31721A774A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9E9DFBE-9B3D-4F49-9776-C31721A774A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9E9DFBE-9B3D-4F49-9776-C31721A774A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{046561A7-6C9E-4649-91CE-454D7C25A0A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{046561A7-6C9E-4649-91CE-454D7C25A0A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{046561A7-6C9E-4649-91CE-454D7C25A0A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{046561A7-6C9E-4649-91CE-454D7C25A0A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

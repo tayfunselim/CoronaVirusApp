@@ -1,10 +1,8 @@
 ﻿using CoronaVirusApp.Core;
 using CoronaVirusApp.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CoronaVirusApp.Data.SqlData
 {
@@ -42,12 +40,10 @@ namespace CoronaVirusApp.Data.SqlData
             return coronaVirusDbContext.Diseases.SingleOrDefault(d=>d.Id == id);
         }
 
-        public IEnumerable<Disease> GetDiseases(string Name)
+        public IEnumerable<Disease> GetDiseases()
         {
-            var sNamePattern = !string.IsNullOrEmpty(Name) ? $"{Name}%" : Name;
-            return coronaVirusDbContext.Diseases
-                .Where(a => string.IsNullOrEmpty(Name) || EF.Functions.Like(a.Name, sNamePattern))
-                .ToList();
+            
+            return coronaVirusDbContext.Diseases.ToList();
         }
 
         public Disease Update(Disease disease)

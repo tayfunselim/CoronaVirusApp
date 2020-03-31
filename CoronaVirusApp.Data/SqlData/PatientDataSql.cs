@@ -1,9 +1,8 @@
 ﻿using CoronaVirusApp.Core;
 using CoronaVirusApp.Data.Interfaces;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CoronaVirusApp.Data.SqlData
 {
@@ -38,12 +37,17 @@ namespace CoronaVirusApp.Data.SqlData
 
         public Patient GetPatientById(int id)
         {
-            return coronaVirusDbContext.Patients.SingleOrDefault(p => p.Id == id);
+            return coronaVirusDbContext.Patients                
+                .Include (p => p.Appointment)
+                .Include(p => p.Diseases)
+                .SingleOrDefault(p => p.Id == id);
         }
 
         public IEnumerable<Patient> GetPatients(string searchName = null)
         {
             return coronaVirusDbContext.Patients
+                .Include(p => p.Appointment)
+                .Include (p => p.Diseases)
                 .Where(p => string.IsNullOrEmpty(searchName)
                    || p.FirstName.ToLower().StartsWith(searchName.ToLower())
                    || p.LastName.ToLower().StartsWith(searchName.ToLower()))
@@ -53,7 +57,7 @@ namespace CoronaVirusApp.Data.SqlData
 
         public Patient Update(Patient patient)
         {
-            coronaVirusDbContext.Entry(patient).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            coronaVirusDbContext.Entry(patient).State = EntityState.Modified;
             return patient;
         }
     }

@@ -13,36 +13,38 @@ else
     <h1>Edit appointment no: @Model.Appointment.Id </h1>
 }
 
-<div class="container">
-    <form method="post">
-        <input type="hidden" asp-for="Appointment.Id" />
-        <div class="form-row">
-            <div class="form-group col-sm-6">
-                <label asp-for="Appointment.ClinicId"></label>
-                <select class="form-control" asp-for="Appointment.ClinicId" asp-items="@Model.Clinics">
-                    <option value="">Select clinic!</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-sm-6">
-                <label asp-for="Appointment.Date"></label>
-                <input class="form-control" asp-for="Appointment.Date" />
-                <span class="text-danger" asp-validation-for="Appointment.Date"></span>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-sm-6">
-                <label asp-for="Appointment.Symptom"></label>
-                <select class="form-control" asp-for="Appointment.Symptom" asp-items="@Model.Symptom">
-                    <option value="">select symptom</option>
-                </select>
-                <span class="text-danger" asp-validation-for="Appointment.Symptom"></span>
-            </div>
-        </div>
 
-        <button type="submit" class="btn btn-success">Save</button>
-        <a asp-page="./List" class="btn btn-primary">Back</a>
-    </form>
-</div>
+<form method="post">
+    <input type="hidden" asp-for="Appointment.Id" />
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Appointment.ClinicId"></label>
+            <select class="form-control" asp-for="Appointment.ClinicId" asp-items="@Model.Clinics">
+                <option value="">Select clinic!</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Appointment.DoctorId"></label>
+            <select class="form-control" asp-for="Appointment.DoctorId" asp-items="@Model.Doctors">
+                <option value="">Select doctor!</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Appointment.Date"></label>
+            <input class="form-control" asp-for="Appointment.Date" />
+            <span class="text-danger" asp-validation-for="Appointment.Date"></span>
+        </div>    
+        <div class="form-group col-sm-6">
+            <label asp-for="Appointment.Symptom"></label>
+            <select class="form-control" asp-for="Appointment.Symptom" asp-items="@Model.Symptom">
+                <option value="">select symptom</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Appointment.Symptom"></span>
+        </div>
+    </div>
 
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-page="./List" class="btn btn-primary">Back</a>
+</form>

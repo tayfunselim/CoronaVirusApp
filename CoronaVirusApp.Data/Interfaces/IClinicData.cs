@@ -6,9 +6,7 @@ using System.Text;
 namespace CoronaVirusApp.Data.Interfaces
 {
     public interface IClinicData
-    {
-        IEnumerable<Doctor> GetDoctors(int id);   
-        IEnumerable<Patient> GetPatients(int id); 
+    {        
         int Commit();
         Clinic Create(Clinic clinic);
         Clinic Update(Clinic clinic);

@@ -5,19 +5,7 @@
 }
 
 <h1>Diseases</h1>
-<div>
-    <form method="get">
-        <div class="form-group">
-            <div class="input-group">
-                <input type="search" class="form-control" placeholder="search" asp-for="Name">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </form>
+<div>    
     @if (!string.IsNullOrEmpty(Model.TempMessage))
     {
         <div class="alert alert-warning">@Model.TempMessage</div>
@@ -27,8 +15,7 @@
             <thead class="thead-light">
                 <tr>
                     <th>Name</th>
-                    <th>Disease Type</th>
-                    <th>Spreading Date</th>
+                    <th>Disease Type</th>                    
                     <th>DeathRate</th>                                        
                     <th></th>
                 </tr>
@@ -37,16 +24,12 @@
             {
                 <tr>
                     <td>@disease.Name</td>
-                    <td>@disease.DiseaseType</td>
-                    <td>@disease.SpreadingDate</td>
+                    <td>@disease.DiseaseType</td>                    
                     <td>@disease.DeathRate %</td>                    
                     <td>
                         <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@disease.Id">
                             <i class="fas fa-edit"></i>
-                        </a>
-                        <a class="btn btn-outline-secondary" asp-page="./Details" asp-route-id="@disease.Id">
-                            <i class="fas fa-search-plus"></i>
-                        </a>
+                        </a>                        
                         <a class="btn btn-outline-secondary" asp-page="./Delete" asp-route-id="@disease.Id">
                             <i class="fas fa-trash"></i>
                         </a>

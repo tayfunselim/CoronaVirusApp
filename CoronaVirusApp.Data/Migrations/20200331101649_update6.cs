@@ -2,16 +2,16 @@
 
 namespace CoronaVirusApp.Data.Migrations
 {
-    public partial class update : Migration
+    public partial class update6 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Appointments_Clinics_ClinicId",
+                name: "FK_Appointments_Doctors_DoctorId",
                 table: "Appointments");
 
             migrationBuilder.AlterColumn<int>(
-                name: "ClinicId",
+                name: "DoctorId",
                 table: "Appointments",
                 nullable: false,
                 oldClrType: typeof(int),
@@ -19,10 +19,10 @@ namespace CoronaVirusApp.Data.Migrations
                 oldNullable: true);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Appointments_Clinics_ClinicId",
+                name: "FK_Appointments_Doctors_DoctorId",
                 table: "Appointments",
-                column: "ClinicId",
-                principalTable: "Clinics",
+                column: "DoctorId",
+                principalTable: "Doctors",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -30,21 +30,21 @@ namespace CoronaVirusApp.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Appointments_Clinics_ClinicId",
+                name: "FK_Appointments_Doctors_DoctorId",
                 table: "Appointments");
 
             migrationBuilder.AlterColumn<int>(
-                name: "ClinicId",
+                name: "DoctorId",
                 table: "Appointments",
                 type: "int",
                 nullable: true,
                 oldClrType: typeof(int));
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Appointments_Clinics_ClinicId",
+                name: "FK_Appointments_Doctors_DoctorId",
                 table: "Appointments",
-                column: "ClinicId",
-                principalTable: "Clinics",
+                column: "DoctorId",
+                principalTable: "Doctors",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
