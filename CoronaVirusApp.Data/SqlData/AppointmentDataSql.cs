@@ -44,6 +44,7 @@ namespace CoronaVirusApp.Data.SqlData
         {            
             return coronaVirusDbContext.Appointments
                 .Include(a=>a.Clinic)         
+                .Include(d => d.Doctor)
                 .ToList();
         }
 
