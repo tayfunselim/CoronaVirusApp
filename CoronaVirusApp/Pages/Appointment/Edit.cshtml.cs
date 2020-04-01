@@ -44,7 +44,7 @@ namespace CoronaVirusApp.Pages.Appointment
             }
 
             var clinics = clinicData.GetClinics().ToList().Select(c => new { Id = c.Id, Display = c.Name });
-            var doctors = clinicData.GetClinics().ToList().Select(d => new { Id = d.Id, Display = d.Name });
+            var doctors = doctorData.GetDoctors().ToList().Select(d => new { Id = d.Id, Display = d.FirstName });
             Doctors = new SelectList(doctors, "Id", "Display");
             Clinics = new SelectList(clinics, "Id", "Display");
             Symptom = htmlHelper.GetEnumSelectList<Symptom>();
