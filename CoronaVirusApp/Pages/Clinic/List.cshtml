@@ -6,6 +6,10 @@
 
 <h1>Clinics</h1>
 <div>
+    @if (!string.IsNullOrEmpty(Model.TempMessage))
+    {
+        <div class="alert alert-warning">@Model.TempMessage</div>
+    }
     <div class="table-responsive">
         <table class="table table-bordered table-primary table-sm">
             <thead class="thead-light">
@@ -13,6 +17,7 @@
                     <th>Name</th>
                     <th>City</th>
                     <th>Capacity (Beds)</th>
+                    <th></th>
                 </tr>
             </thead>
             @foreach (var clinic in Model.Clinics)
@@ -21,6 +26,14 @@
                     <td>@clinic.Name</td>
                     <td>@clinic.City</td>
                     <td>@clinic.Capacity</td>
+                    <td>
+                        <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@clinic.Id">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="btn btn-outline-secondary" asp-page="./Delete" asp-route-id="@clinic.Id">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
                 </tr>
             }
             <tfoot style="visibility:@(!Model.Clinics.Any() ? "visible" : "hidden")">

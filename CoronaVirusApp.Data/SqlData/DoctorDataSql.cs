@@ -14,8 +14,6 @@ namespace CoronaVirusApp.Data.SqlData
         {
             this.coronaVirusDbContext = coronaVirusDbContext;
         }
-
-
         public int Commit()
         {
             return coronaVirusDbContext.SaveChanges();
@@ -42,17 +40,14 @@ namespace CoronaVirusApp.Data.SqlData
             return coronaVirusDbContext.Doctors.SingleOrDefault(d => d.Id == id);
         }
 
-        public IEnumerable<Doctor> GetDoctors(string FirstName)
+        public IEnumerable<Doctor> GetDoctors()
         {
-            var sNamePattern = !string.IsNullOrEmpty(FirstName) ? $"{FirstName}%" : FirstName;
-            return coronaVirusDbContext.Doctors
-                .Where(a => string.IsNullOrEmpty(FirstName) || EF.Functions.Like(a.FirstName, sNamePattern))
-                .ToList();
+            return coronaVirusDbContext.Doctors.ToList();
         }
 
         public Doctor Update(Doctor doctor)
         {
-            coronaVirusDbContext.Entry(doctor).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            coronaVirusDbContext.Entry(doctor).State = EntityState.Modified;
             return doctor;
         }
     }

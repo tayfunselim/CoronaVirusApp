@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using CoronaVirusApp.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,10 +12,7 @@ namespace CoronaVirusApp.Pages.Doctor
         public ListModel(IDoctorData doctorData)
         {
             this.doctorData = doctorData;
-        }
-
-        [BindProperty(SupportsGet = true)]
-        public string FirstName { get; set; }
+        }        
 
         [TempData]
         public string TempMessage { get; set; }
@@ -27,7 +21,7 @@ namespace CoronaVirusApp.Pages.Doctor
 
         public void OnGet()
         {
-            Doctors = doctorData.GetDoctors(FirstName);
+            Doctors = doctorData.GetDoctors();
         }
     }
 }

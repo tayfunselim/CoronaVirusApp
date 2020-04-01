@@ -40,12 +40,16 @@ else
                 </select>
                 <span class="text-danger" asp-validation-for="Doctor.Gender"></span>
             </div>
-
+            <div class="form-group col-sm-6">
+                <label asp-for="Doctor.City"></label>
+                <input class="form-control" asp-for="Doctor.City" />
+                <span class="text-danger" asp-validation-for="Doctor.City"></span>
+            </div>
             <div class="form-group col-sm-6">
                 <label asp-for="Doctor.JobTitle"></label>
                 <input class="form-control" asp-for="Doctor.JobTitle" />
                 <span class="text-danger" asp-validation-for="Doctor.JobTitle"></span>
-            </div>            
+            </div>
         </div>
 
         <button type="submit" class="btn btn-success">Save</button>

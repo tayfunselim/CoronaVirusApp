@@ -12,9 +12,10 @@ namespace CoronaVirusApp.Core
         
         [Required, Display(Name = "Clinic")]
         public int? ClinicId { get; set; }
-
-        [Required, Display (Name = "Doctor")]
-        public Doctor Doctor { get; set; }        
+                
+        public Doctor Doctor { get; set; }
+        
+        [Required, Display(Name = "Doctor")]
         public int? DoctorId { get; set; }
 
         [Required]        

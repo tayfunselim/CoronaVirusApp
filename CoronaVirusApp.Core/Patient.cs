@@ -8,6 +8,7 @@ namespace CoronaVirusApp.Core
     public class Patient : Person
     {
         public Appointment Appointment { get; set; }
+
         [Required, Display (Name = "Appointment" )]
         public int? AppointmentId { get; set; }
         public List<PatientDisease> Diseases { get; set; }        

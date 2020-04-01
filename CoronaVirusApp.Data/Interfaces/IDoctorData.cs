@@ -7,7 +7,7 @@ namespace CoronaVirusApp.Data.Interfaces
 {
     public interface IDoctorData
     {
-        IEnumerable<Doctor> GetDoctors(string FirstName);
+        IEnumerable<Doctor> GetDoctors();
         Doctor GetDoctorById(int? id);
         Doctor Create (Doctor doctor);
         Doctor Delete (int id);

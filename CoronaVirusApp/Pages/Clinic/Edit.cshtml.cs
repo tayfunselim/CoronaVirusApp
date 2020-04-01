@@ -27,7 +27,7 @@ namespace CoronaVirusApp.Pages.Clinic
                 Clinic = clinicData.GetClinicById(id.Value);
                 if (Clinic == null)
                 {
-                    return RedirectToPage("./NotFound");
+                    return RedirectToPage("~/NotFound");
                 }
             }
             else
@@ -44,12 +44,12 @@ namespace CoronaVirusApp.Pages.Clinic
                 if (Clinic.Id == 0)
                 {
                     Clinic = clinicData.Create(Clinic);
-                    TempData["TempMessage"] = "New membership is created!";
+                    TempData["TempMessage"] = "New clinic is created!";
                 }
                 else
                 {
                     Clinic = clinicData.Update(Clinic);
-                    TempData["TempMessage"] = "Membership terms are updated!";
+                    TempData["TempMessage"] = "Clinic details are updated";
                 }
 
                 clinicData.Commit();
