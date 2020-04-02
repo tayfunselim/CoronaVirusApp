@@ -39,7 +39,7 @@ namespace CoronaVirusApp.Data.SqlData
         {
             return coronaVirusDbContext.Patients                
                 .Include (p => p.Appointment)
-                .Include(p => p.Diseases)
+                .Include(p => p.Disease)
                 .SingleOrDefault(p => p.Id == id);
         }
 
@@ -47,7 +47,7 @@ namespace CoronaVirusApp.Data.SqlData
         {
             return coronaVirusDbContext.Patients
                 .Include(p => p.Appointment)
-                .Include (p => p.Diseases)
+                .Include (p => p.Disease)
                 .Where(p => string.IsNullOrEmpty(searchName)
                    || p.FirstName.ToLower().StartsWith(searchName.ToLower())
                    || p.LastName.ToLower().StartsWith(searchName.ToLower()))

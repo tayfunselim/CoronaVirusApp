@@ -21,19 +21,19 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Statistics">Statistics</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Patient/List">Patients</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Clinic/List">Clinics</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Appointment/List">Appointment</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Doctor/List">Doctors</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Disease/List">Diseases</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" data-toggle="dropdown">Appointments</a>
+                            <div class="dropdown-menu">
+                                <a asp-page="/Appointment/List" class="dropdown-item">Appointments</a>
+                                <a asp-page="/Doctor/List" class="dropdown-item">Doctors</a>
+                                <a asp-page="/Clinic/List" class="dropdown-item">Clinics</a>
+                                <a asp-page="/Disease/List" class="dropdown-item">Disease</a>
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Management</a>

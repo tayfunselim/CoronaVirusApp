@@ -6,6 +6,7 @@ using CoronaVirusApp.Core;
 using CoronaVirusApp.Data;
 using CoronaVirusApp.Data.Interfaces;
 using CoronaVirusApp.Data.SqlData;
+using CoronaVirusApp.Statistics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +36,7 @@ namespace CoronaVirusApp
             services.AddScoped<IDoctorData, DoctorDataSql>();
             services.AddScoped<IPatientData, PatientDataSql>();
             services.AddScoped<IDiseaseData, DiseaseDataSql>();
-            services.AddScoped<PatientDisease>();
+            services.AddScoped<CoronaStatistics>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,9 +7,9 @@ namespace CoronaVirusApp.Core
     public enum MedicalHistory
     {
         BreathProblem = 1,
-        Stroke = 2,
-        HeartProblem = 3,
-        Cancer = 4,
-        Diabetes = 5,
+        Stroke = 2,        
+        Cancer = 3,
+        Diabetes = 4,
+        NoHistory = 5        
     }
 }

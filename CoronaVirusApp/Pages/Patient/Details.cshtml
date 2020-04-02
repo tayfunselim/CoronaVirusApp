@@ -12,10 +12,31 @@
     Patient Name: @Model.Patient.FirstName @Model.Patient.LastName
 </div>
 <div>
-    City: @Model.Patient.City
+    City and Age: @Model.Patient.City , @Model.Patient.Age
 </div>
 <div>
-    Age : @Model.Patient.Age
+    Gender : @Model.Patient.Gender
+</div>
+<div>
+    Appointment no: @Model.Patient.Appointment.Id
+</div>
+<div>
+    Disease: @Model.Patient.Disease.Name
+</div>
+<div>
+    Tested for Corona Virus: @Model.Patient.IsTested
+</div>
+<div>
+    For self isolation: @Model.Patient.IsForSelfIsolation
+</div>
+<div>
+    Corona Virus test positive: @Model.Patient.IsCoronaPositive
+</div>
+<div>
+    Recovered: @Model.Patient.IsRecovered
+</div>
+<div>
+    Death: @Model.Patient.IsDead
 </div>
 
 <a asp-page="./List" class="btn btn-primary">Back</a>

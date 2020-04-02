@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoronaVirusApp.Data.Migrations
 {
     [DbContext(typeof(CoronaVirusDbContext))]
-    [Migration("20200331114930_update3")]
-    partial class update3
+    [Migration("20200402063517_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -234,6 +234,10 @@ namespace CoronaVirusApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DiseaseId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
@@ -269,22 +273,9 @@ namespace CoronaVirusApp.Data.Migrations
 
                     b.HasIndex("AppointmentId");
 
-                    b.ToTable("Patients");
-                });
-
-            modelBuilder.Entity("CoronaVirusApp.Core.PatientDisease", b =>
-                {
-                    b.Property<int?>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DiseaseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PatientId", "DiseaseId");
-
                     b.HasIndex("DiseaseId");
 
-                    b.ToTable("PatientDiseases");
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -440,19 +431,10 @@ namespace CoronaVirusApp.Data.Migrations
                         .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("CoronaVirusApp.Core.PatientDisease", b =>
-                {
                     b.HasOne("CoronaVirusApp.Core.Disease", "Disease")
-                        .WithMany("PatientDiseases")
+                        .WithMany()
                         .HasForeignKey("DiseaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CoronaVirusApp.Core.Patient", "Patient")
-                        .WithMany("Diseases")
-                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

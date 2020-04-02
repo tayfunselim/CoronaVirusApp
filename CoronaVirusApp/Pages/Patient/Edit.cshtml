@@ -44,22 +44,22 @@ else
                 <option value="">select gender</option>
             </select>
             <span class="text-danger" asp-validation-for="Patient.Gender"></span>
-        </div>
-        <div class="form-group col-sm-4">
-            <label asp-for="Patient.Appointment.Doctor.FirstName"></label>
-            <input class="form-control" asp-for="Patient.Appointment.Doctor.FirstName" />
-            <span class="text-danger" asp-validation-for="Patient.Appointment.Doctor"></span>
-        </div>
+        </div>        
     </div>
     <div class="form-row">
-        <div class="form-group col-sm-6">
-            <label asp-for="Patient.Diseases"></label>
-            <select class="form-control" asp-for="Patient.Diseases" asp-items="@Model.Diseases">
-                <option value="">select disease</option>
-            </select>
-            <span class="text-danger" asp-validation-for="Patient.Diseases"></span>
+        <div class="form-group col-sm-4">
+            <label asp-for="Patient.AppointmentId"></label>
+            <select class="form-control" asp-for="Patient.AppointmentId" asp-items="@Model.Appointments">
+                <option value="">select appointment</option>
+            </select>            
         </div>
-        <div class="form-group col-sm-6">
+        <div class="form-group col-sm-4">
+            <label asp-for="Patient.DiseaseId"></label>
+            <select class="form-control" asp-for="Patient.DiseaseId" asp-items="@Model.Diseases">
+                <option value="">select disease</option>
+            </select>            
+        </div>
+        <div class="form-group col-sm-4">
             <label asp-for="Patient.MedicalHistory"></label>
             <select class="form-control" asp-for="Patient.MedicalHistory" asp-items="@Model.MedicalHistory">
                 <option value="">select med history</option>
@@ -69,7 +69,6 @@ else
     </div>
     <div class="form-row">
         <div class="form-group col-sm-4">
-
             <label asp-for="Patient.IsTested"></label>
             <input class="form-control" asp-for="Patient.IsTested" />
             <span class="text-danger" asp-validation-for="Patient.IsTested"></span>

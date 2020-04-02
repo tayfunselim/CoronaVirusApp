@@ -1,0 +1,33 @@
+﻿@page
+@model CoronaVirusApp.Pages.StatisticsModel
+@{
+    ViewData["Title"] = "Statistics";
+}
+
+<h1>Statistics</h1>
+<div class="table-responsive">
+    <table class="table table-bordered table-primary table-sm">
+        <thead class="thead-light">
+            <tr>
+                <th>City</th>
+                <th>Total Patients</th>
+                <th>Tested Patients</th>
+                <th>Positive</th>
+                <th>Recovered</th>
+                <th>Self Isolation</th>
+            </tr>
+        </thead>
+        @foreach (var patient in Model.Patients.GroupBy(p => p.City))
+        {
+            <tr>
+                <td>@patient.First().ToString()</td>
+                <td>@patient.Sum(p => Model.GetTotalPatients())</td>
+                <td>TT</td>
+                <td>TT</td>
+                <td>TT</td>
+                <td>TT</td>
+            </tr>
+        }
+    </table>
+
+</div>

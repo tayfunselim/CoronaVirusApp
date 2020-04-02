@@ -15,24 +15,24 @@ namespace CoronaVirusApp.Pages.Patient
         private readonly IAppointmentData appointmentData;
         private readonly IDiseaseData diseaseData;
         private readonly IHtmlHelper htmlHelper;
-        private readonly IDoctorData doctorData;
+        
 
         [BindProperty]
         public Core.Patient Patient { get; set; }
 
         public IEnumerable<SelectListItem> Diseases { get; set; }
-        public Core.Appointment Appointment { get; set; }
+        public IEnumerable<SelectListItem> Appointments { get; set; }
         public IEnumerable<SelectListItem> Gender { get; set; }
         public IEnumerable<SelectListItem> MedicalHistory { get; set; }
 
 
-        public EditModel(IPatientData patientData, IAppointmentData appointmentData, IDiseaseData diseaseData, IHtmlHelper htmlHelper, IDoctorData doctorData)
+        public EditModel(IPatientData patientData, IAppointmentData appointmentData, IDiseaseData diseaseData, IHtmlHelper htmlHelper)
         {
             this.patientData = patientData;
             this.appointmentData = appointmentData;
             this.diseaseData = diseaseData;
             this.htmlHelper = htmlHelper;
-            this.doctorData = doctorData;
+            
         }
 
         public IActionResult OnGet(int? id)
@@ -51,8 +51,10 @@ namespace CoronaVirusApp.Pages.Patient
             }
                         
                         
-            var diseases = diseaseData.GetDiseases().ToList().Select(d => new { Id = d.Id, Display = d.Id });
+            var diseases = diseaseData.GetDiseases().ToList().Select(d => new { Id = d.Id, Display = d.Name });
             Diseases = new SelectList(diseases, "Id", "Display");
+            var appointments = appointmentData.GetAppointments().ToList().Select(a => new {Id = a.Id, Display = "Appointment no: "+ a.Id });
+            Appointments = new SelectList(appointments, "Id", "Display");
             Gender = htmlHelper.GetEnumSelectList<Gender>();
             MedicalHistory = htmlHelper.GetEnumSelectList<MedicalHistory>();
             return Page();
@@ -62,7 +64,10 @@ namespace CoronaVirusApp.Pages.Patient
         {
             if (ModelState.IsValid)
             {
-                
+                var appointment = appointmentData.GetAppointmentById(Patient.AppointmentId);
+                Patient.Appointment = appointment;
+                var disease = diseaseData.GetDiseaseById(Patient.DiseaseId.Value);
+                Patient.Disease = disease;
                 if (Patient.Id == 0)
                 {
                     Patient = patientData.Create(Patient);
@@ -79,8 +84,10 @@ namespace CoronaVirusApp.Pages.Patient
             }
 
             
-            var diseases = diseaseData.GetDiseases().ToList().Select(d => new { Id = d.Id, Display = d.Id });
+            var diseases = diseaseData.GetDiseases().ToList().Select(d => new { Id = d.Id, Display = d.Name });
             Diseases = new SelectList(diseases, "Id", "Display");
+            var appointments = appointmentData.GetAppointments().ToList().Select(a => new { Id = a.Id, Display = "Appointment no: " + a.Id });
+            Appointments = new SelectList(appointments, "Id", "Display");
             Gender = htmlHelper.GetEnumSelectList<Gender>();
             MedicalHistory = htmlHelper.GetEnumSelectList<MedicalHistory>();
             return Page();

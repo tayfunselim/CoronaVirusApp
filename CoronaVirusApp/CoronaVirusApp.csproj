@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CoronaVirusApp.Data\CoronaVirusApp.Data.csproj" />
+    <ProjectReference Include="..\CoronaVirusAppStatistics\CoronaVirusApp.Statistics.csproj" />
   </ItemGroup>
 
 
