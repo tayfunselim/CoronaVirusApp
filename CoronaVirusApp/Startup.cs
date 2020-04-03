@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CoronaVirusApp.Core;
 using CoronaVirusApp.Data;
 using CoronaVirusApp.Data.Interfaces;
 using CoronaVirusApp.Data.SqlData;
@@ -34,8 +29,7 @@ namespace CoronaVirusApp
             services.AddScoped<IAppointmentData, AppointmentDataSql>();
             services.AddScoped<IClinicData, ClinicDataSql>();
             services.AddScoped<IDoctorData, DoctorDataSql>();
-            services.AddScoped<IPatientData, PatientDataSql>();
-            services.AddScoped<IDiseaseData, DiseaseDataSql>();
+            services.AddScoped<IPatientData, PatientDataSql>();            
             services.AddScoped<CoronaStatistics>();
         }
 

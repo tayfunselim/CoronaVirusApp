@@ -4,7 +4,7 @@
     ViewData["Title"] = "List";
 }
 
-<h1>Patients</h1>
+<h1>Patients List</h1>
 <div>
     @if (!string.IsNullOrEmpty(Model.TempMessage))
     {
@@ -20,6 +20,7 @@
                     <th>City</th>                    
                     <th>Is Corona Positiva</th>
                     <th>Recovered</th>
+                    <th></th>
                 </tr>
             </thead>
             @foreach (var patient in Model.Patients)

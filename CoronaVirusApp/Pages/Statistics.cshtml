@@ -5,29 +5,161 @@
 }
 
 <h1>Statistics</h1>
-<div class="table-responsive">
-    <table class="table table-bordered table-primary table-sm">
-        <thead class="thead-light">
-            <tr>
-                <th>City</th>
-                <th>Total Patients</th>
-                <th>Tested Patients</th>
-                <th>Positive</th>
-                <th>Recovered</th>
-                <th>Self Isolation</th>
-            </tr>
-        </thead>
-        @foreach (var patient in Model.Patients.GroupBy(p => p.City))
-        {
-            <tr>
-                <td>@patient.First().ToString()</td>
-                <td>@patient.Sum(p => Model.GetTotalPatients())</td>
-                <td>TT</td>
-                <td>TT</td>
-                <td>TT</td>
-                <td>TT</td>
-            </tr>
-        }
-    </table>
+<h5>Click tabs to filter</h5>
 
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="city-tab" data-toggle="tab" href="#city" role="tab" aria-controls="city" aria-selected="true">City</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="age-tab" data-toggle="tab" href="#age" role="tab" aria-controls="age" aria-selected="false">Age</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="gender-tab" data-toggle="tab" href="#gender" role="tab" aria-controls="gender" aria-selected="false">Gender</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="city" role="tabpanel" aria-labelledby="city-tab">
+        <div class="table-responsive">
+            <table class="table table-bordered table-primary table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>City</th>
+                        <th>Total Patients</th>
+                        <th>Tested Patients</th>
+                        <th>Corona Positive</th>
+                        <th>Recovered</th>
+                        <th>Deaths</th>                        
+                        <th>Self Isolation</th>
+                    </tr>
+                </thead>
+                @foreach (var patient in Model.Patients.GroupBy(p => p.City))
+                {
+                    <tr>
+                        <td>@patient.First().City</td>
+                        <td>@patient.Count()</td>
+                        <td>@patient.Where(c => c.IsTested).Count()</td>
+                        <td>@patient.Where(c => c.IsCoronaPositive == true).Count()</td>
+                        <td>@patient.Where(c => c.IsRecovered == true).Count()</td>
+                        <td>@patient.Where(c => c.IsDead == true).Count()</td>                        
+                        <td>@patient.Where(c => c.IsForSelfIsolation == true).Count()</td>
+                    </tr>
+                }
+                <tr class="bg-secondary">
+                    <td>TOTAL</td>
+                    <td>@Model.Patients.Where(p => p.Id != 0).Count()</td>
+                    <td>@Model.Patients.Where(p => p.IsTested).Count()</td>
+                    <td>@Model.Patients.Where(p => p.IsCoronaPositive == true).Count()</td>
+                    <td>@Model.Patients.Where(p => p.IsRecovered == true).Count()</td>
+                    <td>@Model.Patients.Where(p => p.IsDead == true).Count()</td>                    
+                    <td>@Model.Patients.Where(p => p.IsForSelfIsolation == true).Count()</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane" id="age" role="tabpanel" aria-labelledby="age-tab">
+        <div class="table-responsive">
+            <table class="table table-bordered table-primary table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Age (years old)</th>
+                        <th>Total Patients</th>
+                        <th>Tested Patients</th>
+                        <th>Corona Positive</th>
+                        <th>Recovered</th>
+                        <th>Deaths</th>
+                        <th>Self Isolation</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>0-30</td>
+                    <td>@Model.Patients.Where(a => a.Age < 30 && a.Id != 0).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age < 30 && a.IsTested == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age < 30 && a.IsCoronaPositive == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age < 30 && a.IsRecovered == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age < 30 && a.IsDead == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age < 30 && a.IsForSelfIsolation == true).Count()</td>
+
+                </tr>
+                <tr>
+                    <td>31-60</td>
+                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age<60 && a.Id != 0).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age < 60 && a.IsTested == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age < 60 && a.IsCoronaPositive == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age < 60 && a.IsRecovered == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age < 60 && a.IsDead == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age < 60 && a.IsForSelfIsolation == true).Count()</td>
+                </tr>
+                <tr>
+                    <td>60 <</td>
+                    <td>@Model.Patients.Where(a => a.Age >60 && a.Id != 0).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age > 60 && a.IsTested == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age > 60 && a.IsCoronaPositive == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age > 60 && a.IsRecovered == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age > 60 && a.IsDead == true).Count()</td>
+                    <td>@Model.Patients.Where(a => a.Age > 60 && a.IsForSelfIsolation == true).Count()</td>
+
+                </tr>
+                
+                <tr class="bg-secondary">
+                    <td>TOTAL</td>
+                    <td>@Model.Patients.Where(p => p.Id != 0).Count()</td>
+                    <td>@Model.Patients.Where(p => p.IsTested).Count()</td>
+                    <td>@Model.Patients.Where(p => p.IsCoronaPositive == true).Count()</td>
+                    <td>@Model.Patients.Where(p => p.IsRecovered == true).Count()</td>
+                    <td>@Model.Patients.Where(p => p.IsDead == true).Count()</td>
+                    <td>@Model.Patients.Where(p => p.IsForSelfIsolation == true).Count()</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane" id="gender" role="tabpanel" aria-labelledby="gender-tab">
+        <div class="tab-pane active" id="city" role="tabpanel" aria-labelledby="gender-tab">
+            <div class="table-responsive">
+                <table class="table table-bordered table-primary table-sm">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Gender</th>
+                            <th>Total Patients</th>
+                            <th>Tested Patients</th>
+                            <th>Corona Positive</th>
+                            <th>Recovered</th>
+                            <th>Deaths</th>
+                            <th>Self Isolation</th>
+                        </tr>
+                    </thead>
+                    @foreach (var patient in Model.Patients.GroupBy(p => p.Gender))
+                    {
+                        <tr>
+                            <td>@patient.First().Gender</td>
+                            <td>@patient.Count()</td>
+                            <td>@patient.Where(c => c.IsTested).Count()</td>
+                            <td>@patient.Where(c => c.IsCoronaPositive == true).Count()</td>
+                            <td>@patient.Where(c => c.IsRecovered == true).Count()</td>
+                            <td>@patient.Where(c => c.IsDead == true).Count()</td>
+                            <td>@patient.Where(c => c.IsForSelfIsolation == true).Count()</td>
+                        </tr>
+                    }
+                    <tr class="bg-secondary">
+                        <td>TOTAL</td>
+                        <td>@Model.Patients.Where(p => p.Id != 0).Count()</td>
+                        <td>@Model.Patients.Where(p => p.IsTested).Count()</td>
+                        <td>@Model.Patients.Where(p => p.IsCoronaPositive == true).Count()</td>
+                        <td>@Model.Patients.Where(p => p.IsRecovered == true).Count()</td>
+                        <td>@Model.Patients.Where(p => p.IsDead == true).Count()</td>
+                        <td>@Model.Patients.Where(p => p.IsForSelfIsolation == true).Count()</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+
+    </div>
 </div>

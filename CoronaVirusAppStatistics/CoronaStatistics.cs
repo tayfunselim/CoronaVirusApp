@@ -1,10 +1,7 @@
 ﻿using CoronaVirusApp.Core;
 using CoronaVirusApp.Data;
 using CoronaVirusApp.Data.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CoronaVirusApp.Statistics
 {
@@ -24,24 +21,28 @@ namespace CoronaVirusApp.Statistics
         {
             return coronaVirusDbContext.Patients.Count();
         }
-        public int TotalCoronaCases(Patient patient)
+        public int TotalPatientsByCity(Patient patient)
+        {
+            return coronaVirusDbContext.Patients.Count();
+        }
+        public int TotalCoronaCases()
         {
             var result = 0;
-            foreach (var item in coronaVirusDbContext.Patients.Where(p => p.IsCoronaPositive))
+            foreach (var item in coronaVirusDbContext.Patients.ToList())
             {
-                if (patient.IsCoronaPositive)
+                if (item.IsCoronaPositive == true)
                 {
                     result++;
                 }
             }
             return result;
         }
-        public int TotalRecoveries (Patient patient)
+        public int TotalRecoveries ()
         {
             var result = 0;
-            foreach (var item in patient.IsRecovered.ToString())
+            foreach (var item in coronaVirusDbContext.Patients.ToList())
             {
-                if (patient.IsRecovered)
+                if (item.IsRecovered == true)
                 {
                     result++;
                 }
@@ -49,23 +50,21 @@ namespace CoronaVirusApp.Statistics
             return result;
         }
 
-        public int GetTotalDeaths(Patient patient)
+        public int TotalDeaths()
         {
             var result = 0;
-            foreach (var item in patient.IsDead.ToString())
+            foreach (var item in coronaVirusDbContext.Patients.ToList())
             {
-                if (patient.IsRecovered)
+                if (item.IsDead == true)
                 {
                     result++;
                 }
             }
             return result;
         }
-        //public int GetActiveCoronaCases ()
-        //{
-        //    var patient = new Patient();
-        //    return GetTotalCoronaCases(patient) - GetTotalRecoveries(patient) - GetTotalDeaths(patient);
-        //}
-
+        public int ActiveCases()
+        {
+            return TotalCoronaCases() - TotalRecoveries() - TotalDeaths();
+        }
     }
 }

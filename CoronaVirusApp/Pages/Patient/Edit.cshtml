@@ -33,12 +33,12 @@ else
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-6">
             <label asp-for="Patient.City"></label>
             <input class="form-control" asp-for="Patient.City" />
             <span class="text-danger" asp-validation-for="Patient.City"></span>
         </div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-6">
             <label asp-for="Patient.Gender"></label>
             <select class="form-control" asp-for="Patient.Gender" asp-items="@Model.Gender">
                 <option value="">select gender</option>
@@ -47,19 +47,13 @@ else
         </div>        
     </div>
     <div class="form-row">
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-6">
             <label asp-for="Patient.AppointmentId"></label>
             <select class="form-control" asp-for="Patient.AppointmentId" asp-items="@Model.Appointments">
                 <option value="">select appointment</option>
             </select>            
-        </div>
-        <div class="form-group col-sm-4">
-            <label asp-for="Patient.DiseaseId"></label>
-            <select class="form-control" asp-for="Patient.DiseaseId" asp-items="@Model.Diseases">
-                <option value="">select disease</option>
-            </select>            
-        </div>
-        <div class="form-group col-sm-4">
+        </div>        
+        <div class="form-group col-sm-6">
             <label asp-for="Patient.MedicalHistory"></label>
             <select class="form-control" asp-for="Patient.MedicalHistory" asp-items="@Model.MedicalHistory">
                 <option value="">select med history</option>

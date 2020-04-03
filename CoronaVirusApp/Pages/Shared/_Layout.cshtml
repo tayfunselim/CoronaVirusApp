@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/solid.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/solid.min.css" />    
 </head>
 <body>
     <header>
@@ -31,19 +31,10 @@
                             <div class="dropdown-menu">
                                 <a asp-page="/Appointment/List" class="dropdown-item">Appointments</a>
                                 <a asp-page="/Doctor/List" class="dropdown-item">Doctors</a>
-                                <a asp-page="/Clinic/List" class="dropdown-item">Clinics</a>
-                                <a asp-page="/Disease/List" class="dropdown-item">Disease</a>
+                                <a asp-page="/Clinic/List" class="dropdown-item">Clinics</a>                                
                             </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Management</a>
-                            <div class="dropdown-menu">
-                                <a asp-page="/Managment/Users/Index" class="dropdown-item">Users</a>
-                                <a asp-page="/Managment/Roles/Roles" class="dropdown-item">Roles</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
+                        </li>                        
+                    </ul>                    
                 </div>
             </div>
         </nav>

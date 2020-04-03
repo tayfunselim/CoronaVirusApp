@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace CoronaVirusApp.Core
 {
@@ -12,15 +10,13 @@ namespace CoronaVirusApp.Core
         
         [Required, Display(Name = "Clinic")]
         public int? ClinicId { get; set; }
-                
         public Doctor Doctor { get; set; }
         
         [Required, Display(Name = "Doctor")]
         public int? DoctorId { get; set; }
 
         [Required]        
-        public DateTime Date { get; set; }        
-        
+        public DateTime Date { get; set; }    
         public Symptom Symptom { get; set; }        
     }
 }

@@ -11,10 +11,6 @@ namespace CoronaVirusApp.Core
 
         [Required, Display (Name = "Appointment" )]
         public int? AppointmentId { get; set; }
-        public Disease Disease { get; set; }
-        
-        [Required, Display(Name = "Disease")]
-        public int? DiseaseId { get; set; }
         public MedicalHistory MedicalHistory { get; set; }
         public bool IsTested { get; set; }
         public bool IsForSelfIsolation { get; set; }

@@ -38,16 +38,14 @@ namespace CoronaVirusApp.Data.SqlData
         public Patient GetPatientById(int id)
         {
             return coronaVirusDbContext.Patients                
-                .Include (p => p.Appointment)
-                .Include(p => p.Disease)
+                .Include (p => p.Appointment)                
                 .SingleOrDefault(p => p.Id == id);
         }
 
         public IEnumerable<Patient> GetPatients(string searchName = null)
         {
             return coronaVirusDbContext.Patients
-                .Include(p => p.Appointment)
-                .Include (p => p.Disease)
+                .Include(p => p.Appointment)                
                 .Where(p => string.IsNullOrEmpty(searchName)
                    || p.FirstName.ToLower().StartsWith(searchName.ToLower())
                    || p.LastName.ToLower().StartsWith(searchName.ToLower()))
