@@ -14,24 +14,27 @@
         <table class="table table-bordered table-primary table-sm">
             <thead class="thead-light">
                 <tr>
-                    <th>Clinic</th>
+                    <th>Patient</th>
                     <th>Date</th>
-                    <th>Doctor</th>
-                    <th>Symptom</th>                    
+                    <th>Symptom</th>
+                    <th>Medical History</th>
                     <th></th>
                 </tr>
             </thead>
             @foreach (var appointment in Model.Appointments)
             {
         <tr>
-            <td>@appointment.Clinic?.Name</td>
+            <td>@appointment.Patient?.FirstName @appointment.Patient?.LastName</td>
             <td>@appointment.Date</td>
-            <td>@appointment.Doctor?.FirstName @appointment.Doctor?.LastName</td>
-            <td>@appointment.Symptom</td>            
+            <td>@appointment.Symptom</td>
+            <td>@appointment.HasMedicalHistory</td>
             <td>
                 <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@appointment.Id">
                     <i class="fas fa-edit"></i>
-                </a>                
+                </a>
+                <a class="btn btn-outline-secondary" asp-page="./Details" asp-route-id="@appointment.Id">
+                    <i class="fas fa-search-plus"></i>
+                </a>
                 <a class="btn btn-outline-secondary" asp-page="./Delete" asp-route-id="@appointment.Id">
                     <i class="fas fa-trash"></i>
                 </a>

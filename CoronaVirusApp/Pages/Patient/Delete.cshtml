@@ -1,8 +1,14 @@
-﻿@page
+﻿@page "{id:int}"
 @model CoronaVirusApp.Pages.Patient.DeleteModel
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
-
+<h1>Deleting patient @Model.Patient.FirstName @Model.Patient.LastName!</h1>
+<div class="alert alert-dark">
+    Are you sure you want to delete @Model.Patient.FirstName @Model.Patient.LastName?
+</div>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Yes!</button>
+    <a asp-page="./List" class="btn btn-outline-dark">Cancel</a>
+</form>

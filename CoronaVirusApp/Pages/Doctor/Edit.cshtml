@@ -46,9 +46,10 @@ else
                 <span class="text-danger" asp-validation-for="Doctor.City"></span>
             </div>
             <div class="form-group col-sm-6">
-                <label asp-for="Doctor.JobTitle"></label>
-                <input class="form-control" asp-for="Doctor.JobTitle" />
-                <span class="text-danger" asp-validation-for="Doctor.JobTitle"></span>
+                <label asp-for="Doctor.ClinicId"></label>
+                <select class="form-control" asp-for="Doctor.ClinicId" asp-items="@Model.Clinics">
+                    <option value="">select appointment</option>
+                </select>
             </div>
         </div>
 

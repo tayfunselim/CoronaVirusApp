@@ -12,25 +12,20 @@ namespace CoronaVirusApp.Pages.Patient
     public class EditModel : PageModel
     {
         private readonly IPatientData patientData;
-        private readonly IAppointmentData appointmentData;        
+        private readonly IDoctorData doctorData;
         private readonly IHtmlHelper htmlHelper;
         
 
         [BindProperty]
         public Core.Patient Patient { get; set; }
-
-        
-        public IEnumerable<SelectListItem> Appointments { get; set; }
+        public IEnumerable<SelectListItem> Doctors { get; set; }
         public IEnumerable<SelectListItem> Gender { get; set; }
-        public IEnumerable<SelectListItem> MedicalHistory { get; set; }
 
-
-        public EditModel(IPatientData patientData, IAppointmentData appointmentData, IHtmlHelper htmlHelper)
+        public EditModel(IPatientData patientData, IDoctorData doctorData, IHtmlHelper htmlHelper)
         {
             this.patientData = patientData;
-            this.appointmentData = appointmentData;            
-            this.htmlHelper = htmlHelper;
-            
+            this.doctorData = doctorData;
+            this.htmlHelper = htmlHelper;            
         }
 
         public IActionResult OnGet(int? id)
@@ -46,12 +41,10 @@ namespace CoronaVirusApp.Pages.Patient
             else
             {
                 Patient = new Core.Patient();
-            }                        
-            
-            var appointments = appointmentData.GetAppointments().ToList().Select(a => new {Id = a.Id, Display = "Appointment no: "+ a.Id });
-            Appointments = new SelectList(appointments, "Id", "Display");
-            Gender = htmlHelper.GetEnumSelectList<Gender>();
-            MedicalHistory = htmlHelper.GetEnumSelectList<MedicalHistory>();
+            }
+            var doctors = doctorData.GetDoctors().ToList().Select(d => new { Id = d.Id, Display = $"{d.FirstName} {d.LastName}"});
+            Doctors = new SelectList(doctors, "Id", "Display");
+            Gender = htmlHelper.GetEnumSelectList<Gender>();            
             return Page();
         }
 
@@ -59,8 +52,8 @@ namespace CoronaVirusApp.Pages.Patient
         {
             if (ModelState.IsValid)
             {
-                var appointment = appointmentData.GetAppointmentById(Patient.AppointmentId);
-                Patient.Appointment = appointment;                
+                var doctor = doctorData.GetDoctorById(Patient.DoctorId);
+                Patient.Doctor = doctor;
                 if (Patient.Id == 0)
                 {
                     Patient = patientData.Create(Patient);
@@ -69,17 +62,16 @@ namespace CoronaVirusApp.Pages.Patient
                 else
                 {
                     Patient = patientData.Update(Patient);
-                    TempData["TempMessage"] = "Data for customer is updated!";
+                    TempData["TempMessage"] = "Data for patient is updated!";
                 }
 
                 patientData.Commit();
                 return RedirectToPage("./List");
             }
 
-            var appointments = appointmentData.GetAppointments().ToList().Select(a => new { Id = a.Id, Display = "Appointment no: " + a.Id });
-            Appointments = new SelectList(appointments, "Id", "Display");
-            Gender = htmlHelper.GetEnumSelectList<Gender>();
-            MedicalHistory = htmlHelper.GetEnumSelectList<MedicalHistory>();
+            var doctors = doctorData.GetDoctors().ToList().Select(d => new { Id = d.Id, Display = $"{d.FirstName} {d.LastName}" });
+            Doctors = new SelectList(doctors, "Id", "Display");
+            Gender = htmlHelper.GetEnumSelectList<Gender>();            
             return Page();
         }
     }

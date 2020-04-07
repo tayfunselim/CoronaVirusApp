@@ -48,48 +48,12 @@ else
     </div>
     <div class="form-row">
         <div class="form-group col-sm-6">
-            <label asp-for="Patient.AppointmentId"></label>
-            <select class="form-control" asp-for="Patient.AppointmentId" asp-items="@Model.Appointments">
-                <option value="">select appointment</option>
+            <label asp-for="Patient.DoctorId"></label>
+            <select class="form-control" asp-for="Patient.DoctorId" asp-items="@Model.Doctors">
+                <option value="">select doctor</option>
             </select>            
-        </div>        
-        <div class="form-group col-sm-6">
-            <label asp-for="Patient.MedicalHistory"></label>
-            <select class="form-control" asp-for="Patient.MedicalHistory" asp-items="@Model.MedicalHistory">
-                <option value="">select med history</option>
-            </select>
-            <span class="text-danger" asp-validation-for="Patient.MedicalHistory"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-sm-4">
-            <label asp-for="Patient.IsTested"></label>
-            <input class="form-control" asp-for="Patient.IsTested" />
-            <span class="text-danger" asp-validation-for="Patient.IsTested"></span>
-        </div>
-        <div class="form-group col-sm-4">
-            <label asp-for="Patient.IsForSelfIsolation"></label>
-            <input class="form-control" asp-for="Patient.IsForSelfIsolation" />
-            <span class="text-danger" asp-validation-for="Patient.IsForSelfIsolation"></span>
-        </div>
-        <div class="form-group col-sm-4">
-            <label asp-for="Patient.IsCoronaPositive"></label>
-            <input class="form-control" asp-for="Patient.IsCoronaPositive" />
-            <span class="text-danger" asp-validation-for="Patient.IsCoronaPositive"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-sm-6">
-            <label asp-for="Patient.IsRecovered"></label>
-            <input class="form-control" asp-for="Patient.IsRecovered" />
-            <span class="text-danger" asp-validation-for="Patient.IsRecovered"></span>
-        </div>
-        <div class="form-group col-sm-6">
-            <label asp-for="Patient.IsDead"></label>
-            <input class="form-control" asp-for="Patient.IsDead" />
-            <span class="text-danger" asp-validation-for="Patient.IsDead"></span>
-        </div>
-    </div>
+        </div>                
+    </div>    
     <button type="submit" class="btn btn-success">Save</button>
     <a asp-page="./List" class="btn btn-primary">Back</a>
 </form>

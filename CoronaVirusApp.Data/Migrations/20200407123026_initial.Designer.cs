@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoronaVirusApp.Data.Migrations
 {
     [DbContext(typeof(CoronaVirusDbContext))]
-    [Migration("20200403113058_initial")]
+    [Migration("20200407123026_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,15 +28,28 @@ namespace CoronaVirusApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClinicId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DoctorId")
-                        .IsRequired()
+                    b.Property<bool>("HasMedicalHistory")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCoronaPositive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDead")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsForSelfIsolation")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRecovered")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsTested")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PatientId")
                         .HasColumnType("int");
 
                     b.Property<int>("Symptom")
@@ -44,9 +57,7 @@ namespace CoronaVirusApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClinicId");
-
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("PatientId");
 
                     b.ToTable("Appointments");
                 });
@@ -88,6 +99,9 @@ namespace CoronaVirusApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ClinicId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
@@ -96,15 +110,14 @@ namespace CoronaVirusApp.Data.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<string>("JobTitle")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClinicId");
 
                     b.ToTable("Doctors");
                 });
@@ -119,13 +132,12 @@ namespace CoronaVirusApp.Data.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AppointmentId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -135,56 +147,41 @@ namespace CoronaVirusApp.Data.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsCoronaPositive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDead")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsForSelfIsolation")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRecovered")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsTested")
-                        .HasColumnType("bit");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
-                    b.Property<int>("MedicalHistory")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId");
+                    b.HasIndex("DoctorId");
 
                     b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("CoronaVirusApp.Core.Appointment", b =>
                 {
+                    b.HasOne("CoronaVirusApp.Core.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CoronaVirusApp.Core.Doctor", b =>
+                {
                     b.HasOne("CoronaVirusApp.Core.Clinic", "Clinic")
                         .WithMany()
                         .HasForeignKey("ClinicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CoronaVirusApp.Core.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("CoronaVirusApp.Core.Patient", b =>
                 {
-                    b.HasOne("CoronaVirusApp.Core.Appointment", "Appointment")
+                    b.HasOne("CoronaVirusApp.Core.Doctor", "Doctor")
                         .WithMany()
-                        .HasForeignKey("AppointmentId")
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

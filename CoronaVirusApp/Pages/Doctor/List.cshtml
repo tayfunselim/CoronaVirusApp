@@ -19,7 +19,7 @@
                     <th>Age</th>
                     <th>Gender</th>
                     <th>City</th>
-                    <th>JobTitle</th>
+                    <th>Clinic</th>
                     <th></th>
                 </tr>
             </thead>
@@ -31,7 +31,7 @@
             <td>@doctor.Age</td>
             <td>@doctor.Gender</td>
             <td>@doctor.City</td>
-            <td>@doctor.JobTitle</td>
+            <td>@doctor.Clinic.Name</td>
             <td>
                 <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@doctor.Id">
                     <i class="fas fa-edit"></i>

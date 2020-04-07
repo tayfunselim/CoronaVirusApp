@@ -1,0 +1,33 @@
+﻿@page "{id:int}"
+@model CoronaVirusApp.Pages.Appointment.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details for patient: @Model.Appointment.Patient.FirstName @Model.Appointment.Patient.LastName</h1>
+<div>
+    Patient ID: @Model.Appointment.Patient.Id
+</div>
+<div>
+    Date: @Model.Appointment.Date.Date
+</div>
+<div>
+    Previous medical history: @Model.Appointment.HasMedicalHistory
+</div>
+<div>
+    Is tested for Corona Virus: @Model.Appointment.IsTested
+</div>
+<div>
+    Is for self isolation: @Model.Appointment.IsForSelfIsolation
+</div>
+<div>
+    Is Corona Positive: @Model.Appointment.IsCoronaPositive
+</div>
+<div>
+    Is recovered: @Model.Appointment.IsRecovered
+</div>
+<div>
+    is dead: @Model.Appointment.IsDead
+</div>
+
+<a asp-page="./List" class="btn btn-primary">Back</a>

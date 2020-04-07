@@ -37,12 +37,12 @@ namespace CoronaVirusApp.Data.SqlData
 
         public Doctor GetDoctorById(int? id)
         {
-            return coronaVirusDbContext.Doctors.SingleOrDefault(d => d.Id == id);
+            return coronaVirusDbContext.Doctors.Include(d=>d.Clinic).SingleOrDefault(d => d.Id == id);
         }
 
         public IEnumerable<Doctor> GetDoctors()
         {
-            return coronaVirusDbContext.Doctors.ToList();
+            return coronaVirusDbContext.Doctors.Include(d=>d.Clinic).ToList();
         }
 
         public Doctor Update(Doctor doctor)

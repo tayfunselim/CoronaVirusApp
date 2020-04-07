@@ -18,22 +18,7 @@
     Gender : @Model.Patient.Gender
 </div>
 <div>
-    Appointment no: @Model.Patient.Appointment.Id
-</div>
-<div>
-    Tested for Corona Virus: @Model.Patient.IsTested
-</div>
-<div>
-    For self isolation: @Model.Patient.IsForSelfIsolation
-</div>
-<div>
-    Corona Virus test positive: @Model.Patient.IsCoronaPositive
-</div>
-<div>
-    Recovered: @Model.Patient.IsRecovered
-</div>
-<div>
-    Death: @Model.Patient.IsDead
+    Doctor name: @Model.Patient.Doctor.FirstName @Model.Patient.Doctor.LastName
 </div>
 
 <a asp-page="./List" class="btn btn-primary">Back</a>

@@ -37,15 +37,12 @@ namespace CoronaVirusApp.Data.SqlData
 
         public Appointment GetAppointmentById(int? id)
         {
-            return coronaVirusDbContext.Appointments.SingleOrDefault(a=>a.Id == id);
+            return coronaVirusDbContext.Appointments.Include(a=>a.Patient).SingleOrDefault(a=>a.Id == id);
         }
 
         public IEnumerable<Appointment> GetAppointments()
         {            
-            return coronaVirusDbContext.Appointments
-                .Include(a=>a.Clinic)         
-                .Include(d => d.Doctor)
-                .ToList();
+            return coronaVirusDbContext.Appointments.Include(a=>a.Patient).ToList();
         }
 
         public Appointment Update(Appointment appointment)

@@ -18,11 +18,10 @@
         <a class="nav-link" id="gender-tab" data-toggle="tab" href="#gender" role="tab" aria-controls="gender" aria-selected="false">Gender</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+        <a class="nav-link" id="clinic-tab" data-toggle="tab" href="#clinic" role="tab" aria-controls="clinic" aria-selected="false">Clinic</a>
     </li>
 </ul>
 
-<!-- Tab panes -->
 <div class="tab-content">
     <div class="tab-pane active" id="city" role="tabpanel" aria-labelledby="city-tab">
         <div class="table-responsive">
@@ -32,32 +31,35 @@
                         <th>City</th>
                         <th>Total Patients</th>
                         <th>Tested Patients</th>
+                        <th>Self Isolation</th>
                         <th>Corona Positive</th>
                         <th>Recovered</th>
-                        <th>Deaths</th>                        
-                        <th>Self Isolation</th>
+                        <th>Deaths</th>
+
                     </tr>
                 </thead>
-                @foreach (var patient in Model.Patients.GroupBy(p => p.City))
+                @foreach (var appointment in Model.Appointments.GroupBy(a => a.Patient.City))
                 {
                     <tr>
-                        <td>@patient.First().City</td>
-                        <td>@patient.Count()</td>
-                        <td>@patient.Where(c => c.IsTested).Count()</td>
-                        <td>@patient.Where(c => c.IsCoronaPositive == true).Count()</td>
-                        <td>@patient.Where(c => c.IsRecovered == true).Count()</td>
-                        <td>@patient.Where(c => c.IsDead == true).Count()</td>                        
-                        <td>@patient.Where(c => c.IsForSelfIsolation == true).Count()</td>
+                        <td>@appointment.First().Patient.City</td>
+                        <td>@appointment.Count()</td>
+                        <td>@appointment.Where(a => a.IsTested == true).Count()</td>
+                        <td>@appointment.Where(a => a.IsForSelfIsolation == true).Count()</td>
+                        <td>@appointment.Where(a => a.IsCoronaPositive == true).Count()</td>
+                        <td>@appointment.Where(a => a.IsRecovered == true).Count()</td>
+                        <td>@appointment.Where(a => a.IsDead == true).Count()</td>
                     </tr>
+
                 }
+
                 <tr class="bg-secondary">
                     <td>TOTAL</td>
-                    <td>@Model.Patients.Where(p => p.Id != 0).Count()</td>
-                    <td>@Model.Patients.Where(p => p.IsTested).Count()</td>
-                    <td>@Model.Patients.Where(p => p.IsCoronaPositive == true).Count()</td>
-                    <td>@Model.Patients.Where(p => p.IsRecovered == true).Count()</td>
-                    <td>@Model.Patients.Where(p => p.IsDead == true).Count()</td>                    
-                    <td>@Model.Patients.Where(p => p.IsForSelfIsolation == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.Patient.Id != 0).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsTested == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsForSelfIsolation == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsCoronaPositive == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsRecovered == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsDead == true).Count()</td>
                 </tr>
             </table>
         </div>
@@ -70,50 +72,50 @@
                         <th>Age (years old)</th>
                         <th>Total Patients</th>
                         <th>Tested Patients</th>
+                        <th>Self Isolation</th>
                         <th>Corona Positive</th>
                         <th>Recovered</th>
                         <th>Deaths</th>
-                        <th>Self Isolation</th>
                     </tr>
                 </thead>
                 <tr>
                     <td>0-30</td>
-                    <td>@Model.Patients.Where(a => a.Age < 30 && a.Id != 0).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age < 30 && a.IsTested == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age < 30 && a.IsCoronaPositive == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age < 30 && a.IsRecovered == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age < 30 && a.IsDead == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age < 30 && a.IsForSelfIsolation == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age < 30 && a.Id != 0).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age < 30 && a.IsTested == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age < 30 && a.IsForSelfIsolation == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age < 30 && a.IsCoronaPositive == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age < 30 && a.IsRecovered == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age < 30 && a.IsDead == true).Count()</td>
 
                 </tr>
                 <tr>
                     <td>31-60</td>
-                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age<60 && a.Id != 0).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age < 60 && a.IsTested == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age < 60 && a.IsCoronaPositive == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age < 60 && a.IsRecovered == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age < 60 && a.IsDead == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age > 31 && a.Age < 60 && a.IsForSelfIsolation == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 31 && a.Patient.Age < 60 && a.Id != 0).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 31 && a.Patient.Age < 60 && a.IsTested == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 31 && a.Patient.Age < 60 && a.IsForSelfIsolation == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 31 && a.Patient.Age < 60 && a.IsCoronaPositive == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 31 && a.Patient.Age < 60 && a.IsRecovered == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 31 && a.Patient.Age < 60 && a.IsDead == true).Count()</td>
                 </tr>
                 <tr>
-                    <td>60 <</td>
-                    <td>@Model.Patients.Where(a => a.Age >60 && a.Id != 0).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age > 60 && a.IsTested == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age > 60 && a.IsCoronaPositive == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age > 60 && a.IsRecovered == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age > 60 && a.IsDead == true).Count()</td>
-                    <td>@Model.Patients.Where(a => a.Age > 60 && a.IsForSelfIsolation == true).Count()</td>
+                    <td>60+</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 60 && a.Id != 0).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 60 && a.IsTested == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 60 && a.IsForSelfIsolation == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 60 && a.IsCoronaPositive == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 60 && a.IsRecovered == true).Count()</td>
+                    <td>@Model.Appointments.Where(a => a.Patient.Age > 60 && a.IsDead == true).Count()</td>
 
                 </tr>
-                
+
                 <tr class="bg-secondary">
                     <td>TOTAL</td>
-                    <td>@Model.Patients.Where(p => p.Id != 0).Count()</td>
-                    <td>@Model.Patients.Where(p => p.IsTested).Count()</td>
-                    <td>@Model.Patients.Where(p => p.IsCoronaPositive == true).Count()</td>
-                    <td>@Model.Patients.Where(p => p.IsRecovered == true).Count()</td>
-                    <td>@Model.Patients.Where(p => p.IsDead == true).Count()</td>
-                    <td>@Model.Patients.Where(p => p.IsForSelfIsolation == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.Patient.Id != 0).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsTested == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsForSelfIsolation == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsCoronaPositive == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsRecovered == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsDead == true).Count()</td>
                 </tr>
             </table>
         </div>
@@ -127,39 +129,76 @@
                             <th>Gender</th>
                             <th>Total Patients</th>
                             <th>Tested Patients</th>
+                            <th>Self Isolation</th>
                             <th>Corona Positive</th>
                             <th>Recovered</th>
                             <th>Deaths</th>
-                            <th>Self Isolation</th>
                         </tr>
                     </thead>
-                    @foreach (var patient in Model.Patients.GroupBy(p => p.Gender))
+                    @foreach (var patient in Model.Appointments.GroupBy(p => p.Patient.Gender))
                     {
                         <tr>
-                            <td>@patient.First().Gender</td>
+                            <td>@patient.First().Patient.Gender</td>
                             <td>@patient.Count()</td>
                             <td>@patient.Where(c => c.IsTested).Count()</td>
+                            <td>@patient.Where(c => c.IsForSelfIsolation == true).Count()</td>
                             <td>@patient.Where(c => c.IsCoronaPositive == true).Count()</td>
                             <td>@patient.Where(c => c.IsRecovered == true).Count()</td>
                             <td>@patient.Where(c => c.IsDead == true).Count()</td>
-                            <td>@patient.Where(c => c.IsForSelfIsolation == true).Count()</td>
                         </tr>
                     }
                     <tr class="bg-secondary">
                         <td>TOTAL</td>
-                        <td>@Model.Patients.Where(p => p.Id != 0).Count()</td>
-                        <td>@Model.Patients.Where(p => p.IsTested).Count()</td>
-                        <td>@Model.Patients.Where(p => p.IsCoronaPositive == true).Count()</td>
-                        <td>@Model.Patients.Where(p => p.IsRecovered == true).Count()</td>
-                        <td>@Model.Patients.Where(p => p.IsDead == true).Count()</td>
-                        <td>@Model.Patients.Where(p => p.IsForSelfIsolation == true).Count()</td>
+                        <td>@Model.Appointments.Where(p => p.Id != 0).Count()</td>
+                        <td>@Model.Appointments.Where(p => p.IsTested).Count()</td>
+                        <td>@Model.Appointments.Where(p => p.IsCoronaPositive == true).Count()</td>
+                        <td>@Model.Appointments.Where(p => p.IsRecovered == true).Count()</td>
+                        <td>@Model.Appointments.Where(p => p.IsDead == true).Count()</td>
+                        <td>@Model.Appointments.Where(p => p.IsForSelfIsolation == true).Count()</td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
+    <div class="tab-pane" id="clinic" role="tabpanel" aria-labelledby="clinic-tab">
+        <div class="table-responsive">
+            <table class="table table-bordered table-primary table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Clinic</th>
+                        <th>Total Patients</th>
+                        <th>Tested Patients</th>
+                        <th>Self Isolation</th>
+                        <th>Corona Positive</th>
+                        <th>Recovered</th>
+                        <th>Deaths</th>
 
-    <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                    </tr>
+                </thead>
+                @foreach (var appointment in Model.Appointments.GroupBy(a => a.Patient.Doctor.ClinicId))
+                {
+                    <tr>
+                        <td>@appointment.First().Patient.Doctor.ClinicId</td>
+                        <td>@appointment.Count()</td>
+                        <td>@appointment.Where(a => a.IsTested == true).Count()</td>
+                        <td>@appointment.Where(a => a.IsForSelfIsolation == true).Count()</td>
+                        <td>@appointment.Where(a => a.IsCoronaPositive == true).Count()</td>
+                        <td>@appointment.Where(a => a.IsRecovered == true).Count()</td>
+                        <td>@appointment.Where(a => a.IsDead == true).Count()</td>
+                    </tr>
 
+                }
+
+                <tr class="bg-secondary">
+                    <td>TOTAL</td>
+                    <td>@Model.Appointments.Where(p => p.Patient.Id != 0).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsTested == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsForSelfIsolation == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsCoronaPositive == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsRecovered == true).Count()</td>
+                    <td>@Model.Appointments.Where(p => p.IsDead == true).Count()</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>

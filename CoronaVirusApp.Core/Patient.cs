@@ -7,15 +7,8 @@ namespace CoronaVirusApp.Core
 {
     public class Patient : Person
     {
-        public Appointment Appointment { get; set; }
-
-        [Required, Display (Name = "Appointment" )]
-        public int? AppointmentId { get; set; }
-        public MedicalHistory MedicalHistory { get; set; }
-        public bool IsTested { get; set; }
-        public bool IsForSelfIsolation { get; set; }
-        public bool IsCoronaPositive { get; set; }
-        public bool IsRecovered { get; set; }
-        public bool IsDead { get; set; }
+        public Doctor Doctor { get; set; }
+        [Required, Display (Name = "Doctor")]
+        public int DoctorId { get; set; }        
     }
 }

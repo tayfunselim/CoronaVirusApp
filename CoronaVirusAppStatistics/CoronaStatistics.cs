@@ -28,7 +28,7 @@ namespace CoronaVirusApp.Statistics
         public int TotalCoronaCases()
         {
             var result = 0;
-            foreach (var item in coronaVirusDbContext.Patients.ToList())
+            foreach (var item in coronaVirusDbContext.Appointments.ToList())
             {
                 if (item.IsCoronaPositive == true)
                 {
@@ -40,7 +40,7 @@ namespace CoronaVirusApp.Statistics
         public int TotalRecoveries ()
         {
             var result = 0;
-            foreach (var item in coronaVirusDbContext.Patients.ToList())
+            foreach (var item in coronaVirusDbContext.Appointments.ToList())
             {
                 if (item.IsRecovered == true)
                 {
@@ -53,7 +53,7 @@ namespace CoronaVirusApp.Statistics
         public int TotalDeaths()
         {
             var result = 0;
-            foreach (var item in coronaVirusDbContext.Patients.ToList())
+            foreach (var item in coronaVirusDbContext.Appointments.ToList())
             {
                 if (item.IsDead == true)
                 {

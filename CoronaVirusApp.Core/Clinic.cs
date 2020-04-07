@@ -12,7 +12,6 @@ namespace CoronaVirusApp.Core
 
         [Required]
         public string City { get; set; }        
-        
         public int Capacity { get; set; }        
     }
 }

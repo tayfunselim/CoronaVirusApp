@@ -17,9 +17,9 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Age</th>
-                    <th>City</th>                    
-                    <th>Is Corona Positiva</th>
-                    <th>Recovered</th>
+                    <th>City</th>
+                    <th>Gender</th>
+                    <th>Doctor</th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,9 +30,8 @@
             <td>@patient.LastName</td>
             <td>@patient.Age</td>
             <td>@patient.City</td>            
-            <td>@patient.IsCoronaPositive</td>
-            <td>@patient.IsRecovered</td>            
-
+            <td>@patient.Gender</td>      
+            <td>@patient.Doctor?.FirstName @patient.Doctor?.LastName</td>            
             <td>
                 <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@patient.Id">
                     <i class="fas fa-edit"></i>

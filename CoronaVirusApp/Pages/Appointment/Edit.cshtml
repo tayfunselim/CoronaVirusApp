@@ -18,30 +18,58 @@ else
     <input type="hidden" asp-for="Appointment.Id" />
     <div class="form-row">
         <div class="form-group col-sm-6">
-            <label asp-for="Appointment.ClinicId"></label>
-            <select class="form-control" asp-for="Appointment.ClinicId" asp-items="@Model.Clinics">
-                <option value="">Select clinic!</option>
+            <label asp-for="Appointment.PatientId"></label>
+            <select class="form-control" asp-for="Appointment.PatientId" asp-items="@Model.Patients">
+                <option value="">Select patient!</option>
             </select>
         </div>
-        <div class="form-group col-sm-6">
-            <label asp-for="Appointment.DoctorId"></label>
-            <select class="form-control" asp-for="Appointment.DoctorId" asp-items="@Model.Doctors">
-                <option value="">Select doctor!</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-row">
         <div class="form-group col-sm-6">
             <label asp-for="Appointment.Date"></label>
             <input class="form-control" asp-for="Appointment.Date" />
             <span class="text-danger" asp-validation-for="Appointment.Date"></span>
-        </div>    
-        <div class="form-group col-sm-6">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-4">
             <label asp-for="Appointment.Symptom"></label>
             <select class="form-control" asp-for="Appointment.Symptom" asp-items="@Model.Symptom">
                 <option value="">select symptom</option>
             </select>
             <span class="text-danger" asp-validation-for="Appointment.Symptom"></span>
+        </div>
+        <div class="form-group col-sm-4">
+            <label asp-for="Appointment.HasMedicalHistory"></label>
+            <input class="form-control" asp-for="Appointment.HasMedicalHistory" />
+            <span class="text-danger" asp-validation-for="Appointment.HasMedicalHistory"></span>
+        </div>
+        <div class="form-group col-sm-4">
+            <label asp-for="Appointment.IsForSelfIsolation"></label>
+            <input class="form-control" asp-for="Appointment.IsForSelfIsolation" />
+            <span class="text-danger" asp-validation-for="Appointment.IsForSelfIsolation"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Appointment.IsTested"></label>
+            <input class="form-control" asp-for="Appointment.IsTested" />
+            <span class="text-danger" asp-validation-for="Appointment.IsTested"></span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Appointment.IsCoronaPositive"></label>
+            <input class="form-control" asp-for="Appointment.IsCoronaPositive" />
+            <span class="text-danger" asp-validation-for="Appointment.IsCoronaPositive"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Appointment.IsRecovered"></label>
+            <input class="form-control" asp-for="Appointment.IsRecovered" />
+            <span class="text-danger" asp-validation-for="Appointment.IsRecovered"></span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Appointment.IsDead"></label>
+            <input class="form-control" asp-for="Appointment.IsDead" />
+            <span class="text-danger" asp-validation-for="Appointment.IsDead"></span>
         </div>
     </div>
 
