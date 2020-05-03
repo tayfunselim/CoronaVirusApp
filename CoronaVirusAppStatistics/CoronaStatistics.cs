@@ -62,9 +62,9 @@ namespace CoronaVirusApp.Statistics
         //    }
         //    return result;
         //}
-        public int ActiveCases()
-        {
-            return TotalCoronaCases() - TotalRecoveries() - TotalDeaths();
-        }
+        //public int ActiveCases()
+        //{
+        //    return TotalCoronaCases() - TotalRecoveries() - TotalDeaths();
+        //}
     }
 }

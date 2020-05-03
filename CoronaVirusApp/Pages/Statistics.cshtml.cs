@@ -25,10 +25,10 @@ namespace CoronaVirusApp.Pages
             return coronaStatistics.TotalPatients();
         }
         
-        public int GetActiveCases()
-        {
-            return coronaStatistics.ActiveCases();
-        }
+        //public int GetActiveCases()
+        //{
+        //    return coronaStatistics.ActiveCases();
+        //}
         
         public void OnGet()
         {
