@@ -50,18 +50,18 @@ namespace CoronaVirusApp.Statistics
             return result;
         }
 
-        public int TotalDeaths()
-        {
-            var result = 0;
-            foreach (var item in coronaVirusDbContext.Appointments.ToList())
-            {
-                if (item.IsDead == true)
-                {
-                    result++;
-                }
-            }
-            return result;
-        }
+        //public int TotalDeaths()
+        //{
+        //    var result = 0;
+        //    foreach (var item in coronaVirusDbContext.Appointments.ToList())
+        //    {
+        //        if (item.IsDead == true)
+        //        {
+        //            result++;
+        //        }
+        //    }
+        //    return result;
+        //}
         public int ActiveCases()
         {
             return TotalCoronaCases() - TotalRecoveries() - TotalDeaths();
